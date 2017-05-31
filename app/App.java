@@ -1,22 +1,20 @@
 import java.awt.EventQueue;
-
-import controller.KalendarzController;
-import model.KalendarzModel;
-import view.KalendarzView;
+import controller.CalendarController;
+import model.CalendarModel;
+import view.CalendarView;
 
 public class App {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					KalendarzView theKalendarzView = new KalendarzView();
-					KalendarzModel theKalendarzModel = new KalendarzModel();
-					theKalendarzView.setVisible(true);
-					KalendarzController theKalendarzController = new KalendarzController(theKalendarzView, theKalendarzModel);
+					CalendarView theCalendarView = new CalendarView();
+					CalendarModel theCalendarModel = new CalendarModel();
+					theCalendarView.setVisible(true);
+					CalendarController theCalendarController = new CalendarController(theCalendarView, theCalendarModel);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 			}
 		});
 	}

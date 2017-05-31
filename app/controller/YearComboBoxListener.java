@@ -3,22 +3,22 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.KalendarzModel;
-import view.KalendarzView;
+import model.CalendarModel;
+import view.CalendarView;
 
 public class YearComboBoxListener implements ActionListener {
-	private KalendarzView theKalendarzView = new KalendarzView();
-	private KalendarzModel theKalendarzModel = new KalendarzModel();
+	private CalendarView theCalendarView = new CalendarView();
+	private CalendarModel theCalendarModel = new CalendarModel();
 	
-	YearComboBoxListener(KalendarzView theKalendarzView, KalendarzModel theKalendarzModel){
-		this.theKalendarzView = theKalendarzView;
-		this.theKalendarzModel = theKalendarzModel;
+	YearComboBoxListener(CalendarView theCalendarView, CalendarModel theCalendarModel){
+		this.theCalendarView = theCalendarView;
+		this.theCalendarModel = theCalendarModel;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		int year = theKalendarzView.getYearSelectComboBoxSelectedItem();
-		int month = theKalendarzView.getMonthSelectComboBoxSelectedItem();
-		theKalendarzView.updateButtonFielsGrid(theKalendarzModel.updateCalendar(year, month));
+		int year = theCalendarView.getYearSelectComboBoxSelectedItem();
+		int month = theCalendarView.getMonthSelectComboBoxSelectedItem();
+		theCalendarView.updateButtonFielsGrid(theCalendarModel.updateCalendar(year, month));
 	}
 
 }
