@@ -7,7 +7,7 @@ import model.CalendarModel;
 import model.EventManager;
 import view.CalendarView;
 
-public class MonthComboBoxListener implements ActionListener{
+public class MonthComboBoxListener implements ActionListener {
 	private CalendarView theCalendarView = new CalendarView();
 	private CalendarModel theCalendarModel = new CalendarModel();
 	private EventManager theEventManager = new EventManager();

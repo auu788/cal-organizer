@@ -18,7 +18,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class CalendarView extends JFrame {
 	private JPanel contentPane = new JPanel();
@@ -34,6 +39,7 @@ public class CalendarView extends JFrame {
 	public CalendarView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 500, 350);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -49,9 +55,6 @@ public class CalendarView extends JFrame {
 			buttonFields[i] = new JButton();
 			// buttonFields[i].setEditable(false);
 			buttonFields[i].setHorizontalAlignment(JTextField.CENTER);
-			buttonFields[i].setBorderPainted(false);
-			buttonFields[i].setFocusPainted(false);
-			buttonFields[i].setContentAreaFilled(false);
 
 //			buttonFields[i].addMouseListener(new MouseListener() {
 //
@@ -80,17 +83,19 @@ public class CalendarView extends JFrame {
 	public void updateButtonFielsGrid(String[] dayButtonsText){
 		for (int i = 0; i < buttonFields.length; i++) {
 			buttonFields[i].setText(dayButtonsText[i]);
+			buttonFields[i].setBackground(Color.WHITE);
+			buttonFields[i].setForeground(Color.BLACK);
+			buttonFields[i].setBorderPainted(true);
+			buttonFields[i].setOpaque(true);
 			
 			if (dayButtonsText[i] != "") {
-				buttonFields[i].setBorderPainted(true);
-				buttonFields[i].setBackground(Color.WHITE);
-				buttonFields[i].setForeground(Color.BLACK);
-				buttonFields[i].setOpaque(true);
+				buttonFields[i].setEnabled(true);
 				
 			}
 			else {
-				buttonFields[i].setBorderPainted(false);
-				buttonFields[i].setOpaque(false);
+
+				buttonFields[i].setBackground(new Color(235, 235, 235));
+				buttonFields[i].setEnabled(false);
 			}
 			
 		}
@@ -178,6 +183,12 @@ public class CalendarView extends JFrame {
 					}
 				}
 			}
+		}
+	}
+	
+	public void addDayButtonsListener(ActionListener listenForDayButtons) {
+		for (int i = 0; i < buttonFields.length; i++) {
+			buttonFields[i].addActionListener(listenForDayButtons);
 		}
 	}
 }

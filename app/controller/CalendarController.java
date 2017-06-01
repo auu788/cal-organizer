@@ -19,12 +19,14 @@ public class CalendarController {
 		theCalendarView.addYearSelectComboBoxListener(new YearComboBoxListener(this.theCalendarView, this.theCalendarModel, this.theEventManager));
 		theCalendarView.addMonthSelectComboBoxListener(new MonthComboBoxListener(this.theCalendarView, this.theCalendarModel, this.theEventManager));
 		theCalendarView.createAddEventButton();
-		theCalendarView.addAddEventButtonListener(new AddEventButtonListener(theCalendarView, theEventManager));
+		theCalendarView.addAddEventButtonListener(new AddEventButtonListener(this.theCalendarView, this.theEventManager));
 		
 		int year = theCalendarView.getYearSelectComboBoxSelectedItem();
 		int month = theCalendarView.getMonthSelectComboBoxSelectedItem();
 
 		theCalendarView.createButtonFielsGrid();
+		theCalendarView.addDayButtonsListener(new DayButtonsListener(this.theCalendarView, this.theEventManager));
+		
 		theCalendarView.updateButtonFielsGrid(theCalendarModel.updateCalendar(year, month));
 	}
 	
