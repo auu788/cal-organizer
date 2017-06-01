@@ -19,63 +19,56 @@ import javax.swing.text.MaskFormatter;
 
 public class AddEventDialog extends JDialog {
 	private JLabel nameLabel, placeLabel, dateLabel, hourLabel, alarmLabel;
-	private JTextField nameTxtField, placeTxtField;
+	private JTextField placeTxtField;
+	private JTextArea nameTxtField;
 	private JFormattedTextField dateTxtField, hourTxtField;
 	private JComboBox alarmComboBox;
 	private JButton confirmButton, cancelButton;
 	
 	public AddEventDialog() {
 		setBounds(100, 100, 450, 300);
+		setTitle("Tworzenie nowego wydarzenia");
 		getContentPane().setLayout(null);
 		
 		nameLabel = new JLabel("Nazwa");
 		nameLabel.setBounds(10, 11, 46, 14);
 		getContentPane().add(nameLabel);
 		
-		nameTxtField = new JTextField();
-		nameTxtField.setBounds(59, 8, 365, 20);
+		nameTxtField = new JTextArea();
+		nameTxtField.setBounds(59, 8, 365, 86);
+		nameTxtField.setLineWrap(true);
+		nameTxtField.setWrapStyleWord(true);
+		nameTxtField.setBorder(new JTextField().getBorder());
 		getContentPane().add(nameTxtField);
 		nameTxtField.setColumns(10);
 		
 		placeLabel = new JLabel("Miejsce");
-		placeLabel.setBounds(10, 73, 46, 14);
+		placeLabel.setBounds(10, 108, 46, 14);
 		getContentPane().add(placeLabel);
 		
 		placeTxtField = new JTextField();
-		placeTxtField.setBounds(59, 73, 365, 20);
+		placeTxtField.setBounds(59, 105, 365, 20);
 		getContentPane().add(placeTxtField);
 		
 		dateLabel = new JLabel("Data");
-		dateLabel.setBounds(10, 133, 46, 14);
+		dateLabel.setBounds(10, 139, 46, 14);
 		getContentPane().add(dateLabel);
 		
 		dateTxtField = new JFormattedTextField(formatter("##-##-####"));
-		dateTxtField.setBounds(59, 130, 99, 20);
+		dateTxtField.setBounds(59, 136, 99, 20);
 		getContentPane().add(dateTxtField);
 		
 		hourLabel = new JLabel("Godzina");
-		hourLabel.setBounds(269, 133, 46, 14);
+		hourLabel.setBounds(271, 139, 46, 14);
 		getContentPane().add(hourLabel);
 		
 		hourTxtField = new JFormattedTextField(formatter("##:##"));
-		hourTxtField.setBounds(325, 130, 99, 20);
+		hourTxtField.setBounds(325, 136, 99, 20);
 		getContentPane().add(hourTxtField);
 		
-		alarmLabel = new JLabel("Alarm");
-		alarmLabel.setBounds(10, 182, 46, 14);
-		getContentPane().add(alarmLabel);
-		
-		alarmComboBox = new JComboBox();
-		alarmComboBox.setBounds(59, 179, 99, 20);
-		getContentPane().add(alarmComboBox);
-		
 		confirmButton = new JButton("Stw\u00F3rz wydarzenie");
-		confirmButton.setBounds(69, 216, 163, 34);
+		confirmButton.setBounds(138, 216, 163, 34);
 		getContentPane().add(confirmButton);
-		
-		cancelButton = new JButton("Anuluj");
-		cancelButton.setBounds(232, 216, 163, 34);
-		getContentPane().add(cancelButton);
 	}
 	
 	private MaskFormatter formatter(String s) {
@@ -89,29 +82,8 @@ public class AddEventDialog extends JDialog {
 	    return formatter;
 	}
 	
-	public Date getEventDate() {
-		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = null;
-		try {
-			date = formatter.parse(dateTxtField.getText());
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return date;
-	}
-	
-	public Date getEventHour() {
-		DateFormat formatter = new SimpleDateFormat("HH:mm");
-		Date time = null;
-		try {
-			time = formatter.parse(hourTxtField.getText());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		return time;
+	public String getEventDate() {
+		return dateTxtField.getText() + " " + hourTxtField.getText();
 	}
 	
 	public String getEventName() {
@@ -122,11 +94,21 @@ public class AddEventDialog extends JDialog {
 		return placeTxtField.getText();
 	}
 	
-	public Integer getEventAlarm() {
+	public int getEventAlarm() {
 		return alarmComboBox.getSelectedIndex();
 	}
 	
 	public void addConfirmListener(ActionListener listenForConfirmation) {
 		confirmButton.addActionListener(listenForConfirmation);
+	}
+	
+	public void setAlarmField(String[] alarmNames) {
+		alarmLabel = new JLabel("Alarm");
+		alarmLabel.setBounds(10, 167, 46, 14);
+		getContentPane().add(alarmLabel);
+		
+		alarmComboBox = new JComboBox(alarmNames);
+		alarmComboBox.setBounds(59, 164, 99, 20);
+		getContentPane().add(alarmComboBox);
 	}
 }

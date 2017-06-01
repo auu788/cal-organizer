@@ -6,7 +6,7 @@ public class CalendarModel {
 	private String monthsNames[] = { "Styczeñ", "Luty", "Marzec", "Kwiecieñ", "Maj", "Czerwiec", "Lipiec", "Sierpieñ",
 			"Wrzesieñ", "PaŸdziernik", "Listopad", "Grudzieñ" };
 	private String[] dayNames = { "PN", "WT", "ŒR", "CZW", "PT", "SOB", "ND" };
-	private String[] newButtonsText = new String[42];
+	private String[] dayButtonsText = new String[42];
 	private int[] monthDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	
 	public CalendarModel() {
@@ -22,10 +22,6 @@ public class CalendarModel {
 
 	public int[] getMonthDays() {
 		return monthDays;
-	}
-
-	public void setMonthDays(int[] monthDays) {
-		this.monthDays = monthDays;
 	}
 
 	public String[] getDayNames() {
@@ -46,10 +42,14 @@ public class CalendarModel {
 		
 	public String[] updateCalendar(int year, int month) {
 		int day = 0;
+		int daysInMonth = 0;
+		
 		if (month == 1 && leapYear(year)) {
-			monthDays[month] = 29;
+			daysInMonth = 29;
+		} else if (month == 1) {
+			daysInMonth = 28;
 		} else {
-			monthDays[month] = 28;
+			daysInMonth = monthDays[month];
 		}
 		Calendar c = Calendar.getInstance();
 		c.set(year, month, 1);
@@ -57,13 +57,15 @@ public class CalendarModel {
 		int day_of_week = c.get(Calendar.DAY_OF_WEEK);
 		day = Math.floorMod(day_of_week - 2, 7);
 
-		for (int i = 0; i < newButtonsText.length; i++) {
-			newButtonsText[i] = "";
+		for (int i = 0; i < dayButtonsText.length; i++) {
+			dayButtonsText[i] = "";
 		}
-		for (int i = 1, j = day; i <= monthDays[month]; i++, j++) {
-			newButtonsText[j] = Integer.toString(i);
+
+		for (int i = 1, j = day; i <= daysInMonth; i++, j++) {
+			dayButtonsText[j] = Integer.toString(i);
 		}
-		return newButtonsText;
+		
+		return dayButtonsText;
 	}
 	
 	private boolean leapYear(int year) {

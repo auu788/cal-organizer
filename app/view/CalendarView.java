@@ -8,7 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,7 +27,7 @@ public class CalendarView extends JFrame {
 	private JLabel[] labels = new JLabel[7];
 	private JComboBox yearSelectComboBox;
 	private JComboBox monthSelectComboBox;
-	private JButton addEventButton = new JButton("Dodaj wydarzenie");
+	private JButton addEventButton;
 	private int d_year = Calendar.getInstance().get(Calendar.YEAR);
 	private int d_month = Calendar.getInstance().get(Calendar.MONTH);
 
@@ -36,9 +38,6 @@ public class CalendarView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		addEventButton.setBounds(345, 11, 135, 43);
-		contentPane.add(addEventButton);
 		
 		monthGridPanel.setBounds(10, 65, 474, 245);
 		contentPane.add(monthGridPanel);
@@ -78,15 +77,14 @@ public class CalendarView extends JFrame {
 	}
 	
 	
-	public void updateButtonFielsGrid(String[] newButtonsText){
+	public void updateButtonFielsGrid(String[] dayButtonsText){
 		for (int i = 0; i < buttonFields.length; i++) {
-			buttonFields[i].setText(newButtonsText[i]);
+			buttonFields[i].setText(dayButtonsText[i]);
 			
-
-			if (newButtonsText[i] != "") {
-				buttonFields[i].setText(newButtonsText[i]);
+			if (dayButtonsText[i] != "") {
 				buttonFields[i].setBorderPainted(true);
 				buttonFields[i].setBackground(Color.WHITE);
+				buttonFields[i].setForeground(Color.BLACK);
 				buttonFields[i].setOpaque(true);
 				
 			}
@@ -106,7 +104,7 @@ public class CalendarView extends JFrame {
 		}
 	}
 	
-	public void crateYearSelectComboBox(String[] getYears) {
+	public void createYearSelectComboBox(String[] getYears) {
 		yearSelectComboBox = new JComboBox<String>(getYears);
 		yearSelectComboBox.setBounds(10, 11, 147, 43);
 		yearSelectComboBox.setSelectedIndex(d_year - 1900);
@@ -121,7 +119,7 @@ public class CalendarView extends JFrame {
 		yearSelectComboBox.addActionListener(listenForSelectYear);
 	}
 
-	public void crateMonthSelectComboBox(String[] getMonths) {
+	public void createMonthSelectComboBox(String[] getMonths) {
 		monthSelectComboBox = new JComboBox<String>(getMonths);
 		monthSelectComboBox.setBounds(180, 11, 147, 43);
 		monthSelectComboBox.setSelectedIndex(d_month);
@@ -162,5 +160,24 @@ public class CalendarView extends JFrame {
 
 	public void setButtonFields(JButton[] buttonFields) {
 		this.buttonFields = buttonFields;
+	}
+	
+	public void createAddEventButton() {
+		addEventButton = new JButton("Dodaj wydarzenie");
+		addEventButton.setBounds(345, 11, 135, 43);
+		contentPane.add(addEventButton);
+	}
+	
+	public void updateEventDays(List<Integer> eventDays) {
+		for (int i = 0; i < buttonFields.length; i++) {
+			if (buttonFields[i].getText() != "") { 
+				for (int evt_day : eventDays) {
+					if (Integer.parseInt(buttonFields[i].getText()) == evt_day) {
+						buttonFields[i].setBackground(Color.RED);
+						buttonFields[i].setForeground(Color.WHITE);
+					}
+				}
+			}
+		}
 	}
 }
