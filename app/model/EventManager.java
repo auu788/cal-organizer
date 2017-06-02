@@ -8,11 +8,19 @@ import java.util.List;
 
 public class EventManager {
 	List<Event> eventList = new ArrayList<Event>();
+	DBManager db;
 	
-	public EventManager() {}
+	public EventManager() {
+		db = new DBManager();
+		
+		db.createTable();
+		eventList = db.loadEventsFromDB();
+	}
 	
 	public void addEvent(String name, String place, Date date, Date alarm) {
-		eventList.add(new Event(name, place, date, alarm));
+		Event event = new Event(name, place, date, alarm);
+		eventList.add(event);
+		db.addEvent(event);
 	}
 	
 	public List<Integer> getEventsByYearAndMonth(int year, int month) {
@@ -45,7 +53,7 @@ public class EventManager {
 	public List<Event> getEventsByDate(int year, int month, int day) {
 		List<Event> queredEventList = new ArrayList<Event>();
 		String queryDate = new String(day + "-" + month + "-" + year);
-		SimpleDateFormat eventFormatDate = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat eventFormatDate = new SimpleDateFormat("dd-M-yyyy");
 		
 		for (Event evt : eventList) {
 			String eventDate = eventFormatDate.format(evt.getDate());

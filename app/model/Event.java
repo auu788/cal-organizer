@@ -1,5 +1,8 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,8 +24,31 @@ public class Event {
 		} else{
 			this.alarm = alarm;
 		}
+	}
+	
+	// Dla wczytywania z bazy
+	public Event(String name, String place, String date, String alarm, String uuid) {
+		DateFormat date_format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
-		System.out.println("Stworzono nowe wydarzenie");
+		this.id = UUID.fromString(uuid);
+		this.name = name;
+		this.place = place;
+		try {
+			this.date = date_format.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		if (alarm == null) {
+			this.alarm = null;
+			
+		} else{
+			try {
+				this.alarm = date_format.parse(alarm);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void setName(String name) {
@@ -39,6 +65,10 @@ public class Event {
 	
 	public void setAlarm(Date alarm) {
 		this.alarm = alarm;
+	}
+	
+	public UUID getID() {
+		return id;
 	}
 	
 	public String getName() {

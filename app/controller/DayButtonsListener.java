@@ -2,8 +2,12 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -32,11 +36,29 @@ public class DayButtonsListener implements ActionListener {
 		EventInfo eventInfo;
 		
 		if ((eventList).size() > 0) {
-			for (Event evt : eventList) {
-				eventInfo = new EventInfo();
-				eventInfo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				eventInfo.setVisible(true);
-				System.out.println("Klik: " + evt.getEventInfo());
+			SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
+			eventInfo = new EventInfo(day + "-" + month + "-" + year);
+			eventInfo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			eventInfo.setVisible(true);
+
+			for (Event evt : eventList) {				
+				String hour = hourFormat.format(evt.getDate());
+				String alarmText;
+				
+				if (evt.getAlarm() == null) {
+					alarmText = "Wy³¹czony";
+				} else {
+					long diffInMilliseconds = evt.getDate().getTime() - evt.getAlarm().getTime();
+					int alarmMinutes = (int) TimeUnit.MINUTES.convert(diffInMilliseconds,TimeUnit.MILLISECONDS);
+					System.out.println(alarmMinutes);
+					if (alarmMinutes < 60) {
+						alarmText = "W³¹czony, " + alarmMinutes + " min przed";
+					} else {
+						alarmText = "W³¹czony, " + alarmMinutes / 60 + " godz przed";
+					}
+				}
+	
+				eventInfo.addEvent(evt.getName(), evt.getPlace(), hour, alarmText);
 			}
 		}
 	}

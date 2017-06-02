@@ -1,13 +1,14 @@
 package controller;
 
 import model.CalendarModel;
+import model.DBManager;
 import model.EventManager;
 import view.CalendarView;
 
 public class CalendarController {
+	private EventManager theEventManager = new EventManager();
 	private CalendarView theCalendarView = new CalendarView();
 	private CalendarModel theCalendarModel = new CalendarModel();
-	private EventManager theEventManager = new EventManager();
 	
 	public CalendarController(CalendarView theCalendarView, CalendarModel theCalendarModel){
 		this.theCalendarView = theCalendarView;
@@ -23,11 +24,17 @@ public class CalendarController {
 		
 		int year = theCalendarView.getYearSelectComboBoxSelectedItem();
 		int month = theCalendarView.getMonthSelectComboBoxSelectedItem();
+		
+		
 
 		theCalendarView.createButtonFielsGrid();
 		theCalendarView.addDayButtonsListener(new DayButtonsListener(this.theCalendarView, this.theEventManager));
 		
 		theCalendarView.updateButtonFielsGrid(theCalendarModel.updateCalendar(year, month));
+		theCalendarView.updateEventDays(
+				theEventManager.getEventsByYearAndMonth(
+						theCalendarView.getYearSelectComboBoxSelectedItem(),
+						theCalendarView.getMonthSelectComboBoxSelectedItem()));
 	}
 	
 }

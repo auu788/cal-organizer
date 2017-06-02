@@ -10,7 +10,7 @@ import view.CalendarView;
 public class YearComboBoxListener implements ActionListener {
 	private CalendarView theCalendarView = new CalendarView();
 	private CalendarModel theCalendarModel = new CalendarModel();
-	private EventManager theEventManager = new EventManager();
+	private EventManager theEventManager;
 	
 	YearComboBoxListener(CalendarView theCalendarView, CalendarModel theCalendarModel, EventManager theEventManager){
 		this.theCalendarView = theCalendarView;
