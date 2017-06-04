@@ -33,6 +33,6 @@ public class SearchListener implements ActionListener {
 		}
 		
 		eventTable.getTableModel().updateTableData(searchPhrase, dateFrom, dateTo);
-		eventTable.updateTable();
+		eventTable.getTableModel().fireTableDataChanged();
 	}
 }

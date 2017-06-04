@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class EventManager {
 	List<Event> eventList = new ArrayList<Event>();
@@ -64,5 +66,16 @@ public class EventManager {
 		}
 		
 		return queredEventList;
+	}
+	
+	public void removeById(UUID id) {
+		Iterator<Event> iter = eventList.listIterator();
+		
+		while (iter.hasNext()) {
+			if (iter.next().getID().equals(id)) {
+				db.removeById(id.toString());
+				iter.remove();
+			}
+		}
 	}
 }

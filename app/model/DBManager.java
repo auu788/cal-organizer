@@ -95,4 +95,18 @@ public class DBManager {
 		
 		return eventList;
 	}
+	
+	public void removeById(String uuid) {
+		try {
+			PreparedStatement prepStmt = connection.prepareStatement(
+					"DELETE FROM events WHERE id=?");
+	
+			prepStmt.setString(1, uuid);
+			prepStmt.execute();
+			
+		} catch (SQLException e) {
+            System.err.println("B³¹d przy usuwaniu wydarzenia.");
+            e.printStackTrace();
+        }
+	}
 }

@@ -28,7 +28,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 		columnNames = new Vector<String>();
 		data = new Vector<String[]>();
 		
-		String[] columnString = {"Data",
+		String[] columnString = {"ID", "Data",
                 "Godzina",
                 "Alarm",
                 "Miejsce",
@@ -56,6 +56,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 		DateFormat hour_format = new SimpleDateFormat("HH:mm");
 		
 		for (Event evt : events) {
+			String uuid = evt.getID().toString();
 			String name = evt.getName();
 			String place = evt.getPlace();
 			
@@ -72,7 +73,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 			} else {
 				long diffInMilliseconds = evt.getDate().getTime() - evt.getAlarm().getTime();
 				int alarmMinutes = (int) TimeUnit.MINUTES.convert(diffInMilliseconds,TimeUnit.MILLISECONDS);
-				System.out.println(alarmMinutes);
+
 				if (alarmMinutes < 60) {
 					alarm = alarmMinutes + " min przed";
 				} else {
@@ -80,7 +81,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 				}
 			}
 			
-			String[] info = {date, hour, alarm, place, name};
+			String[] info = {uuid, date, hour, alarm, place, name};
 			data.add(info);
 		}
 	}
@@ -148,7 +149,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		return data.get(row)[col];
 	}
-	
+
 	public void clearTable()
 	{
 		data.clear();

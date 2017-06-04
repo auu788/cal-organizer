@@ -21,6 +21,7 @@ public class ShowEventsListener implements ActionListener {
 		eventTable.addSearchButtonListener(new SearchListener(this.eventTable, 
 				eventTable.getSearchButton(), eventTable.getClearSearchButton()));
 		
+		eventTable.addRemoveSelectedListener(new RemoveSelectedListener(this.eventTable, this.eventManager));
 		eventTable.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		eventTable.setVisible(true);
 		

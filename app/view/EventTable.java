@@ -27,11 +27,11 @@ import model.OrganizerTableModel;
 import model.TableSorter;
 
 public class EventTable extends JDialog {
-	private EventManager eventManager;
+	private EventManager eventManager; // Do przeniesienia z widoku do kontrolera
 	private JTextField dateFromTextField;
 	private JTextField dateToTextField;
 	private JTextField searchTextField;
-	private JButton searchButton, clearSearchButton;
+	private JButton searchButton, clearSearchButton, removeSelectedButton;
 	private JTable table;
 	private OrganizerTableModel organizerTableModel;
 	
@@ -82,8 +82,12 @@ public class EventTable extends JDialog {
 		filtersPanel.add(searchButton);
 		
 		clearSearchButton = new JButton("Wyczyœæ filtry");
-		clearSearchButton.setBounds(559, 18, 135, 20);
+		clearSearchButton.setBounds(519, 18, 135, 20);
 		filtersPanel.add(clearSearchButton);
+		
+		removeSelectedButton = new JButton("Usuñ");
+		removeSelectedButton.setBounds(659, 18, 135, 20);
+		filtersPanel.add(removeSelectedButton);
 		
 		getRootPane().setDefaultButton(searchButton);
 		updateTable();
@@ -96,12 +100,17 @@ public class EventTable extends JDialog {
 		//table.setFillsViewportHeight(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(80);
-		table.getColumnModel().getColumn(1).setPreferredWidth(70);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
-		table.getColumnModel().getColumn(3).setPreferredWidth(200);
-		table.getColumnModel().getColumn(4).setPreferredWidth(401);
+		table.getColumnModel().getColumn(1).setPreferredWidth(80);
+		table.getColumnModel().getColumn(2).setPreferredWidth(70);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(200);
+		table.getColumnModel().getColumn(5).setPreferredWidth(401);
 		table.setAutoCreateRowSorter(true);
+		
+		// Ukrycie kolumny z ID
+		table.getColumnModel().getColumn(0).setMinWidth(0);
+		table.getColumnModel().getColumn(0).setMaxWidth(0);
+		table.getColumnModel().getColumn(0).setResizable(false);
 		
 		TableRowSorter<OrganizerTableModel> rowSorter = new TableRowSorter<OrganizerTableModel>(this.organizerTableModel);
 		table.setRowSorter(rowSorter);
@@ -113,6 +122,10 @@ public class EventTable extends JDialog {
 	public void addSearchButtonListener(ActionListener listenForSearchButton) {
 		searchButton.addActionListener(listenForSearchButton);
 		clearSearchButton.addActionListener(listenForSearchButton);
+	}
+	
+	public void addRemoveSelectedListener(ActionListener listenForSelectedRows) {
+		removeSelectedButton.addActionListener(listenForSelectedRows);
 	}
 	
 	public String getDateFrom() {
@@ -131,6 +144,10 @@ public class EventTable extends JDialog {
 		return organizerTableModel;
 	}
 	
+	public JTable getTable() {
+		return table;
+	}
+	
 	public JButton getSearchButton() {
 		return searchButton;
 	}
@@ -143,6 +160,10 @@ public class EventTable extends JDialog {
 		dateFromTextField.setText("");
 		dateToTextField.setText("");
 		searchTextField.setText("");
+	}
+	
+	public int[] getSelectedRows() {
+		return table.getSelectedRows();
 	}
 
 }
