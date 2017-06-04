@@ -21,6 +21,9 @@ public class CalendarController {
 		theCalendarView.addMonthSelectComboBoxListener(new MonthComboBoxListener(this.theCalendarView, this.theCalendarModel, this.theEventManager));
 		theCalendarView.createAddEventButton();
 		theCalendarView.addAddEventButtonListener(new AddEventButtonListener(this.theCalendarView, this.theEventManager));
+		theCalendarView.createShowEventsButton();
+		theCalendarView.addShowEventsButtonListener(new ShowEventsListener(this.theEventManager));
+		
 		
 		int year = theCalendarView.getYearSelectComboBoxSelectedItem();
 		int month = theCalendarView.getMonthSelectComboBoxSelectedItem();

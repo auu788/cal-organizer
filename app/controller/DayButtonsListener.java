@@ -50,7 +50,7 @@ public class DayButtonsListener implements ActionListener {
 				} else {
 					long diffInMilliseconds = evt.getDate().getTime() - evt.getAlarm().getTime();
 					int alarmMinutes = (int) TimeUnit.MINUTES.convert(diffInMilliseconds,TimeUnit.MILLISECONDS);
-					System.out.println(alarmMinutes);
+
 					if (alarmMinutes < 60) {
 						alarmText = "W³¹czony, " + alarmMinutes + " min przed";
 					} else {

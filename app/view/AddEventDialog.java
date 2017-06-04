@@ -69,6 +69,8 @@ public class AddEventDialog extends JDialog {
 		confirmButton = new JButton("Stw\u00F3rz wydarzenie");
 		confirmButton.setBounds(138, 216, 163, 34);
 		getContentPane().add(confirmButton);
+		
+		getRootPane().setDefaultButton(confirmButton);
 	}
 	
 	private MaskFormatter formatter(String s) {

@@ -34,9 +34,7 @@ public class EventConfirmListener implements ActionListener {
 		this.theCalendarView = theCalendarView;
 	};
 	
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("Tworzenie nowego wydarzenia, tylko wypisanie...");
-		
+	public void actionPerformed(ActionEvent e) {	
 		if (assignAndIsValid() == true) {
 			eventManager.addEvent(name, place, dateHour, getDateOfAlarm());
 			theCalendarView.updateEventDays(
@@ -92,7 +90,7 @@ public class EventConfirmListener implements ActionListener {
 		
 		name = dialog.getEventName();
 		place = dialog.getEventPlace();
-		System.out.println("Wszystko poprawnie");
+		
 		return true;
 	}
 	

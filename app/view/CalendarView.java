@@ -32,7 +32,7 @@ public class CalendarView extends JFrame {
 	private JLabel[] labels = new JLabel[7];
 	private JComboBox yearSelectComboBox;
 	private JComboBox monthSelectComboBox;
-	private JButton addEventButton;
+	private JButton addEventButton, showEventsButton;
 	private int d_year = Calendar.getInstance().get(Calendar.YEAR);
 	private int d_month = Calendar.getInstance().get(Calendar.MONTH);
 
@@ -40,7 +40,7 @@ public class CalendarView extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 500, 350);
+		setBounds(100, 100, 700, 350);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -190,5 +190,15 @@ public class CalendarView extends JFrame {
 		for (int i = 0; i < buttonFields.length; i++) {
 			buttonFields[i].addActionListener(listenForDayButtons);
 		}
+	}
+	
+	public void createShowEventsButton() {
+		showEventsButton = new JButton("Wyœwietl wydarzenia");
+		showEventsButton.setBounds(505, 11, 135, 43);
+		contentPane.add(showEventsButton);
+	}
+	
+	public void addShowEventsButtonListener(ActionListener listenForShowEventsButton) {
+		showEventsButton.addActionListener(listenForShowEventsButton);
 	}
 }
