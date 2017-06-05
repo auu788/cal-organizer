@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,12 +9,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 public class EventManager {
 	List<Event> eventList = new ArrayList<Event>();
+	
 	DBManager db;
+	XMLManager xml;
+	ICSManager ics;
 	
 	public EventManager() {
 		db = new DBManager();
+		xml = new XMLManager();
+		ics = new ICSManager();
 		
 		db.createTable();
 		eventList = db.loadEventsFromDB();
@@ -22,6 +32,7 @@ public class EventManager {
 	public void addEvent(String name, String place, Date date, Date alarm) {
 		Event event = new Event(name, place, date, alarm);
 		eventList.add(event);
+		
 		db.addEvent(event);
 	}
 	
@@ -78,4 +89,20 @@ public class EventManager {
 			}
 		}
 	}
+	
+	public void importFromXML(File file) {
+		this.eventList = xml.importFromXML(file);
+		System.out.println("Pomyœlnie zaimportowano dane z pliku XML.");
+	}
+	
+	public void exportToXML(File file) {
+		xml.exportToXML(this.eventList, file);
+		System.out.println("Pomyœlnie wyeksportowane dane do pliku XML.");
+	}
+	
+	public void exportToICS(File file) {
+		ics.exportToICS(this.eventList, file);
+		System.out.println("Pomyœlnie wyeksportowane dane do pliku ICS.");
+	}
+
 }

@@ -4,12 +4,12 @@
 - UI Improvments
 -- Menu with import / export, settings, about
 -- Visual improvments in every frame
-- XML Support
-- Outlook extension support
+- ---XML Support---
+- ---Outlook extension support---
 - "Settings" dialog
 - "About" dialog
-- "Remove older than..." support
+- ---"Remove older than..." support---
 - Alarm support
-- Import / export support
+- ---Import / export support---
 - Better input validation
 - Date panel?

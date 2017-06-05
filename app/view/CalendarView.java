@@ -32,7 +32,9 @@ public class CalendarView extends JFrame {
 	private JLabel[] labels = new JLabel[7];
 	private JComboBox yearSelectComboBox;
 	private JComboBox monthSelectComboBox;
-	private JButton addEventButton, showEventsButton;
+	private JButton addEventButton, showEventsButton, removeOlderButton;
+	private JButton importFromXMLButton, exportToXMLButton;
+	private JButton exportToICSButton;
 	private int d_year = Calendar.getInstance().get(Calendar.YEAR);
 	private int d_month = Calendar.getInstance().get(Calendar.MONTH);
 
@@ -174,14 +176,23 @@ public class CalendarView extends JFrame {
 	}
 	
 	public void updateEventDays(List<Integer> eventDays) {
+		boolean isEvent;
+		
 		for (int i = 0; i < buttonFields.length; i++) {
+			isEvent = false;
 			if (buttonFields[i].getText() != "") { 
 				for (int evt_day : eventDays) {
 					if (Integer.parseInt(buttonFields[i].getText()) == evt_day) {
 						buttonFields[i].setBackground(Color.RED);
 						buttonFields[i].setForeground(Color.WHITE);
+						isEvent = true;
 					}
 				}
+			}
+			
+			if (isEvent == false) {
+				buttonFields[i].setBackground(Color.WHITE);
+				buttonFields[i].setForeground(Color.BLACK);
 			}
 		}
 	}
@@ -194,11 +205,51 @@ public class CalendarView extends JFrame {
 	
 	public void createShowEventsButton() {
 		showEventsButton = new JButton("Wyœwietl wydarzenia");
-		showEventsButton.setBounds(505, 11, 135, 43);
+		showEventsButton.setBounds(505, 11, 165, 43);
 		contentPane.add(showEventsButton);
 	}
 	
 	public void addShowEventsButtonListener(ActionListener listenForShowEventsButton) {
 		showEventsButton.addActionListener(listenForShowEventsButton);
+	}
+	
+	public void createRemoveOlderThanButton() {
+		removeOlderButton = new JButton("Usuñ wydarzenia starsznie ni¿");
+		removeOlderButton.setBounds(505, 60, 165, 43);
+		contentPane.add(removeOlderButton);
+	}
+	
+	public void addRemoveOlderThanButtonListener(ActionListener listenForRemoveOlderThanButton) {
+		removeOlderButton.addActionListener(listenForRemoveOlderThanButton);
+	}
+	
+	public void createImportFromXMLButton() {
+		importFromXMLButton = new JButton("Importuj z XML-a");
+		importFromXMLButton.setBounds(505, 110, 165, 43);
+		contentPane.add(importFromXMLButton);
+	}
+	
+	public void addImportFromXMLButtonListener(ActionListener listenForImportFromXML) {
+		importFromXMLButton.addActionListener(listenForImportFromXML);
+	}
+	
+	public void createExportToXMLButton() {
+		exportToXMLButton = new JButton("Eksportuj do XML-a");
+		exportToXMLButton.setBounds(505, 160, 165, 43);
+		contentPane.add(exportToXMLButton);
+	}
+	
+	public void addExportToXMLButtonListener(ActionListener listenForExportToXML) {
+		exportToXMLButton.addActionListener(listenForExportToXML);
+	}
+	
+	public void createExportToICSButton() {
+		exportToICSButton = new JButton("Eksportuj do ICS-a");
+		exportToICSButton.setBounds(505, 210, 165, 43);
+		contentPane.add(exportToICSButton);
+	}
+	
+	public void addExportToICSButtonListener(ActionListener listenForExportToICS) {
+		exportToICSButton.addActionListener(listenForExportToICS);
 	}
 }
