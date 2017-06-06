@@ -1,5 +1,4 @@
 package controller;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,18 +12,19 @@ import view.CalendarView;
 import model.EventManager;
 import model.ImportExportChooser;
 
-public class ImportExportXMLListener implements ActionListener {
+public class ImportExportDBListener implements ActionListener {
 	EventManager eventManager;
 	ImportExportChooser choose;
 	CalendarView calendarView;
 	
-	public ImportExportXMLListener(EventManager eventManager, CalendarView calendarView, ImportExportChooser choose) {
+	public ImportExportDBListener(EventManager eventManager, CalendarView calendarView, ImportExportChooser choose) {
 		this.eventManager = eventManager;
 		this.choose = choose;
 		this.calendarView = calendarView;
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
 		if (this.eventManager.getEventList().size() == 0 && choose == ImportExportChooser.EXPORT) {
 			JOptionPane.showMessageDialog(null,
 				    "Brak wydarzeñ do wyeksportowania!",
@@ -37,7 +37,7 @@ public class ImportExportXMLListener implements ActionListener {
 		File file;
 		
 		if (choose == ImportExportChooser.IMPORT) {
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki XML (*.xml)", "xml");
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki SQLite (*.db)", "db");
 			fileChooser.addChoosableFileFilter(filter);
 			fileChooser.setAcceptAllFileFilterUsed(false);
 			int val = fileChooser.showOpenDialog(null);		
@@ -45,7 +45,7 @@ public class ImportExportXMLListener implements ActionListener {
 			if (val == JFileChooser.APPROVE_OPTION) {
 				file = fileChooser.getSelectedFile();
 				
-				eventManager.importFromXML(file);
+				eventManager.importFromDB(file);
 				calendarView.updateEventDays(
 						eventManager.getEventsByYearAndMonth(
 								calendarView.getYearSelectComboBoxSelectedItem(),
@@ -63,10 +63,10 @@ public class ImportExportXMLListener implements ActionListener {
 		    	file = fileChooser.getSelectedFile();
 		    	String filePath = file.toString();
 		    	
-		    	if (!filePath.endsWith(".xml"))
-		    		filePath += ".xml";
+		    	if (!filePath.endsWith(".db"))
+		    		filePath += ".db";
 		    	
-		    	eventManager.exportToXML(new File(filePath));
+		    	eventManager.exportToDB(new File(filePath));
 		    	
 		    	JOptionPane.showMessageDialog(fileChooser,
 					    "Pomyœlnie wyeksportowano wydarzenia!",

@@ -35,6 +35,7 @@ public class DayButtonsListener implements ActionListener {
 		List<Event> eventList = theEventManager.getEventsByDate(year, month, day);
 		EventInfo eventInfo;
 		
+		System.out.println(eventList.size());
 		if ((eventList).size() > 0) {
 			SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 			eventInfo = new EventInfo(day + "-" + month + "-" + year);

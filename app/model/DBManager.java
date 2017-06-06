@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,26 +9,16 @@ import java.util.List;
 
 public class DBManager {
 	private String driver = "org.sqlite.JDBC";
-	private String path = "jdbc:sqlite:bazka.db";
-	
+
 	private Connection connection;
 	private Statement statement;
 
 	
 	public DBManager() {
-
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			System.err.println("Brak sterownika JDBC.");
-			e.printStackTrace();
-		}
-		
-		try {
-			connection = DriverManager.getConnection(path);
-			statement = connection.createStatement();
-		} catch (SQLException e) {
-			System.err.println("Nie znaleziono pliku z baz¹ danych.");
 			e.printStackTrace();
 		}
 	}
@@ -74,7 +65,25 @@ public class DBManager {
         }
 	}
 	
-	public List<Event> loadEventsFromDB() {
+	public void removeById(String uuid) {
+		try {
+			PreparedStatement prepStmt = connection.prepareStatement(
+					"DELETE FROM events WHERE id=?");
+	
+			prepStmt.setString(1, uuid);
+			prepStmt.execute();
+			
+		} catch (SQLException e) {
+            System.err.println("B³¹d przy usuwaniu wydarzenia.");
+            e.printStackTrace();
+        }
+	}
+	
+	
+	public List<Event> importFromDB(File file) {
+		String filePath = "jdbc:sqlite:" + file.toString();
+		initConnection(filePath);
+		
 		List<Event> eventList = new ArrayList<Event>();
 		
 		try {
@@ -93,20 +102,42 @@ public class DBManager {
 			e.printStackTrace();
 		}
 		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			System.err.println("B³¹d przy zamykaniu po³¹czenia z baz¹ danych.");
+			e.printStackTrace();
+		}
+			
 		return eventList;
 	}
 	
-	public void removeById(String uuid) {
+	public void exportToDB(List<Event> eventList, File file) {
+		String filePath = "jdbc:sqlite:" + file.toString();
+		initConnection(filePath);
+		createTable();
+		
+		for (Event evt : eventList) {
+			addEvent(evt);
+		}
+		
+		System.out.println("Pomyœlnie wyeksportowane wydarzenia do bazy danych.");
+		
 		try {
-			PreparedStatement prepStmt = connection.prepareStatement(
-					"DELETE FROM events WHERE id=?");
-	
-			prepStmt.setString(1, uuid);
-			prepStmt.execute();
-			
+			connection.close();
 		} catch (SQLException e) {
-            System.err.println("B³¹d przy usuwaniu wydarzenia.");
-            e.printStackTrace();
-        }
+			System.err.println("B³¹d przy zamykaniu po³¹czenia z baz¹ danych.");
+			e.printStackTrace();
+		}
+	}
+	
+	private void initConnection(String filePath) {
+		try {
+			this.connection = DriverManager.getConnection(filePath);
+			this.statement = connection.createStatement();
+		} catch (SQLException e) {
+			System.err.println("B³¹d po³¹czenia z baz¹ danych.");
+			e.printStackTrace();
+		}
 	}
 }

@@ -26,7 +26,7 @@ public class AddEventDialog extends JDialog {
 	private JButton confirmButton, cancelButton;
 	
 	public AddEventDialog() {
-		setBounds(100, 100, 450, 300);
+		setBounds(400, 200, 450, 300);
 		setTitle("Tworzenie nowego wydarzenia");
 		getContentPane().setLayout(null);
 		

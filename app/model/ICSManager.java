@@ -63,7 +63,7 @@ public class ICSManager {
 			
 			calendar.getComponents().add(icsEvent);
 		}
-		
+
 		FileOutputStream fout = null;
 		try {
 			fout = new FileOutputStream(file);
@@ -83,7 +83,5 @@ public class ICSManager {
 			System.err.println("Wyst¹pi³ b³¹d przy zapisie pliku ICS");
 			e.printStackTrace();
 		}
-		
-		System.out.println("Pomyœlnie zapisano kalendarz do formatu iCalendar");
 	}
 }

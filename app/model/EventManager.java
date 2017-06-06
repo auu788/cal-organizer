@@ -25,15 +25,14 @@ public class EventManager {
 		xml = new XMLManager();
 		ics = new ICSManager();
 		
-		db.createTable();
-		eventList = db.loadEventsFromDB();
+		//eventList = db.loadEventsFromDB();
 	}
 	
 	public void addEvent(String name, String place, Date date, Date alarm) {
 		Event event = new Event(name, place, date, alarm);
 		eventList.add(event);
 		
-		db.addEvent(event);
+		//db.addEvent(event);
 	}
 	
 	public List<Integer> getEventsByYearAndMonth(int year, int month) {
@@ -66,11 +65,10 @@ public class EventManager {
 	public List<Event> getEventsByDate(int year, int month, int day) {
 		List<Event> queredEventList = new ArrayList<Event>();
 		String queryDate = new String(day + "-" + month + "-" + year);
-		SimpleDateFormat eventFormatDate = new SimpleDateFormat("dd-M-yyyy");
+		SimpleDateFormat eventFormatDate = new SimpleDateFormat("d-M-yyyy");
 		
 		for (Event evt : eventList) {
 			String eventDate = eventFormatDate.format(evt.getDate());
-			
 			if (queryDate.equals(eventDate)) {
 				queredEventList.add(evt);
 			}
@@ -84,7 +82,7 @@ public class EventManager {
 		
 		while (iter.hasNext()) {
 			if (iter.next().getID().equals(id)) {
-				db.removeById(id.toString());
+				//db.removeById(id.toString());
 				iter.remove();
 			}
 		}
@@ -98,6 +96,16 @@ public class EventManager {
 	public void exportToXML(File file) {
 		xml.exportToXML(this.eventList, file);
 		System.out.println("Pomyœlnie wyeksportowane dane do pliku XML.");
+	}
+	
+	public void importFromDB(File file) {
+		this.eventList = db.importFromDB(file);
+		System.out.println("Pomyœlnie zaimportowane dane z bazy SQLite.");
+	}
+	
+	public void exportToDB(File file) {
+		db.exportToDB(this.eventList, file);
+		System.out.println("Pomyœlnie wyeksportowane dane do bazy SQLite.");
 	}
 	
 	public void exportToICS(File file) {

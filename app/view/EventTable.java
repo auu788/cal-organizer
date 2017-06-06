@@ -38,7 +38,8 @@ public class EventTable extends JDialog {
 	public EventTable(EventManager eventManager) {
 		this.eventManager = eventManager;
 		this.organizerTableModel = new OrganizerTableModel(this.eventManager);
-		setBounds(100, 100, 900, 300);
+		setBounds(400, 200, 900, 300);
+		setTitle("Wszystkie wydarzenia");
 		getContentPane().setLayout(null);
 		
 		JPanel filtersPanel = new JPanel();
@@ -51,42 +52,42 @@ public class EventTable extends JDialog {
 		filtersPanel.add(dateFromTextField);
 		dateFromTextField.setColumns(10);
 		
-		JLabel lblDataOd = new JLabel("Data - od");
-		lblDataOd.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDataOd.setBounds(10, 0, 86, 20);
-		filtersPanel.add(lblDataOd);
+		JLabel dateFromLabel = new JLabel("Data - od");
+		dateFromLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dateFromLabel.setBounds(10, 0, 86, 20);
+		filtersPanel.add(dateFromLabel);
 		
 		dateToTextField = new JTextField();
 		dateToTextField.setBounds(106, 18, 86, 20);
 		filtersPanel.add(dateToTextField);
 		dateToTextField.setColumns(10);
 		
-		JLabel lblDataDo = new JLabel("Data - do");
-		lblDataDo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDataDo.setBounds(106, 0, 86, 20);
-		filtersPanel.add(lblDataDo);
+		JLabel dateToLabel = new JLabel("Data - do");
+		dateToLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		dateToLabel.setBounds(106, 0, 86, 20);
+		filtersPanel.add(dateToLabel);
 		
 		searchTextField = new JTextField();
 		searchTextField.setBounds(202, 18, 162, 20);
+		searchTextField.setColumns(10);
+		filtersPanel.add(searchTextField);
 		
 		JLabel searchLabel = new JLabel("Szukana fraza");
 		searchLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		searchLabel.setBounds(235, 0, 86, 20);
 		filtersPanel.add(searchLabel);
 		
-		filtersPanel.add(searchTextField);
-		searchTextField.setColumns(10);
-		
 		searchButton = new JButton("Filtruj");
-		searchButton.setBounds(374, 18, 135, 20);
+		searchButton.setBounds(374, 0, 135, 38);
+		searchButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		filtersPanel.add(searchButton);
 		
 		clearSearchButton = new JButton("Wyczyœæ filtry");
-		clearSearchButton.setBounds(519, 18, 135, 20);
+		clearSearchButton.setBounds(719, 20, 135, 18);
 		filtersPanel.add(clearSearchButton);
 		
-		removeSelectedButton = new JButton("Usuñ");
-		removeSelectedButton.setBounds(659, 18, 135, 20);
+		removeSelectedButton = new JButton("Usuñ zaznaczone");
+		removeSelectedButton.setBounds(719, 0, 135, 18);
 		filtersPanel.add(removeSelectedButton);
 		
 		getRootPane().setDefaultButton(searchButton);
@@ -96,7 +97,12 @@ public class EventTable extends JDialog {
 	public void updateTable() {
 		table = new JTable(this.organizerTableModel);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 59, 864, 191);
+		scrollPane.setVerticalScrollBarPolicy(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		scrollPane.setBounds(10, 59, 860, 191);
 		//table.setFillsViewportHeight(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getTableHeader().setReorderingAllowed(false);
@@ -104,7 +110,7 @@ public class EventTable extends JDialog {
 		table.getColumnModel().getColumn(2).setPreferredWidth(70);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 		table.getColumnModel().getColumn(4).setPreferredWidth(200);
-		table.getColumnModel().getColumn(5).setPreferredWidth(401);
+		table.getColumnModel().getColumn(5).setPreferredWidth(392);
 		table.setAutoCreateRowSorter(true);
 		
 		// Ukrycie kolumny z ID

@@ -34,15 +34,29 @@ public class RemoveOlderThanListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		 final RemoveOlderThanDialog dialog = new RemoveOlderThanDialog();
-		 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		 dialog.setVisible(true);
+		if (this.eventManager.getEventList().size() == 0) {
+			JOptionPane.showMessageDialog(this.calendarView,
+				    "Brak wydarzeñ do usuniêcia.",
+				    "Uwaga!",
+				    JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		
+		final RemoveOlderThanDialog dialog = new RemoveOlderThanDialog();
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
 		 
-		 
-		 
-		 
-		 dialog.addConfirmListener(new ActionListener() {
+		dialog.addConfirmListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String confirmButtons[] = {"Tak","Nie"};
+		        int PromptResult = JOptionPane.showOptionDialog(dialog,"Jesteœ pewny?","Ostrze¿enie",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,confirmButtons,confirmButtons[1]);
+		        if(PromptResult!=JOptionPane.YES_OPTION)
+		        {
+		            dialog.dispose();
+		            return;
+		        }
+		        
 				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				int removedCount = 0;
 				String message;

@@ -34,7 +34,7 @@ public class EventConfirmListener implements ActionListener {
 		this.theCalendarView = theCalendarView;
 	};
 	
-	public void actionPerformed(ActionEvent e) {	
+	public void actionPerformed(ActionEvent e) {
 		if (assignAndIsValid() == true) {
 			eventManager.addEvent(name, place, dateHour, getDateOfAlarm());
 			theCalendarView.updateEventDays(
@@ -42,7 +42,12 @@ public class EventConfirmListener implements ActionListener {
 							theCalendarView.getYearSelectComboBoxSelectedItem(),
 							theCalendarView.getMonthSelectComboBoxSelectedItem()));
 			
+			JOptionPane.showMessageDialog(dialog,
+				    "Stworzono wydarzenie!",
+				    "Informacja!",
+				    JOptionPane.INFORMATION_MESSAGE);
 			dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
+
 		}
 	}
 	

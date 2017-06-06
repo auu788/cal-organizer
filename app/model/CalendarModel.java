@@ -68,6 +68,14 @@ public class CalendarModel {
 		return dayButtonsText;
 	}
 	
+	public int getTodaysDay(int year, int month) {
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 0); // same for minutes and seconds
+		
+		int todaysDay = today.get(Calendar.DAY_OF_MONTH);
+		return todaysDay;
+	}
+	
 	private boolean leapYear(int year) {
 		if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
 			return true;

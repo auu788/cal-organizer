@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.EventManager;
@@ -19,6 +20,14 @@ public class ExportToICSListener implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (this.eventManager.getEventList().size() == 0) {
+			JOptionPane.showMessageDialog(null,
+				    "Brak wydarzeñ do wyeksportowania!",
+				    "Ostrze¿enie!",
+				    JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		
 		JFileChooser fileChooser = new JFileChooser();
 		File file;
 
@@ -32,6 +41,10 @@ public class ExportToICSListener implements ActionListener{
 	    	
 	    	eventManager.exportToICS(new File(filePath));
 	    	
+	    	JOptionPane.showMessageDialog(fileChooser,
+				    "Pomyœlnie wyeksportowano wydarzenia!",
+				    "Informacja!",
+				    JOptionPane.INFORMATION_MESSAGE);
 	    }
 	}
 

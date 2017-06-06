@@ -17,7 +17,8 @@ public class RemoveOlderThanDialog extends JDialog {
 	private JButton confirmButton;
 	
 	public RemoveOlderThanDialog() {
-		setBounds(100, 100, 250, 200);
+		setBounds(500, 200, 250, 200);
+		setTitle("Usuñ wydarzenia");
 		getContentPane().setLayout(null);
 		
 		removeOlderThanLabel = new JLabel("Usu\u0144 wydarzenia starsze ni\u017C...");
