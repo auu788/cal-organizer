@@ -13,13 +13,15 @@ import model.CalendarModel;
 import model.DBManager;
 import model.EventManager;
 import model.ImportExportChooser;
+import model.SettingsManager;
 import model.XMLManager;
 import view.About;
 import view.AlarmDialog;
 import view.CalendarView;
 
 public class CalendarController {
-	private EventManager theEventManager = new EventManager();
+	SettingsManager settingsManager = new SettingsManager();
+	private EventManager theEventManager = new EventManager(this.settingsManager);
 	private CalendarView theCalendarView = new CalendarView();
 	private CalendarModel theCalendarModel = new CalendarModel();
 	
@@ -27,12 +29,12 @@ public class CalendarController {
 		this.theCalendarView = theCalendarView;
 		this.theCalendarModel = theCalendarModel;
 		
-		AlarmChecker ac = new AlarmChecker(this.theEventManager);
-
+		AlarmChecker ac = new AlarmChecker(this.theEventManager, this.settingsManager);
+		
+		
 		theCalendarView.setLabelsNames(theCalendarModel.getDayNames());
 		theCalendarView.createYearSelectComboBox(theCalendarModel.getYears());
 		theCalendarView.createMonthSelectComboBox(theCalendarModel.getMonthsNames());
-		
 		
 		theCalendarView.addYearSelectComboBoxListener(new YearComboBoxListener(this.theCalendarView, this.theCalendarModel, this.theEventManager));
 		theCalendarView.addMonthSelectComboBoxListener(new MonthComboBoxListener(this.theCalendarView, this.theCalendarModel, this.theEventManager));
@@ -48,7 +50,7 @@ public class CalendarController {
 		theCalendarView.addImportFromDBButtonListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
 		theCalendarView.addExportToDBButtonListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));
 		
-		theCalendarView.addSettingsItemListener(new SettingsListener(ac, this.theEventManager));
+		theCalendarView.addSettingsItemListener(new SettingsListener(ac, this.theEventManager, this.settingsManager, this.theCalendarView));
 		theCalendarView.addAboutItemListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				About about = new About();

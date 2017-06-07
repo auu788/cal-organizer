@@ -40,7 +40,7 @@ public class Settings extends JDialog {
 		separator.setBounds(10, 36, 264, 2);
 		contentPanel.add(separator);
 		
-		alarmSoundLabel = new JLabel("D\u017Awi\u0119k alarmu");
+		alarmSoundLabel = new JLabel("D\u017Awi\u0119k powiadomienia");
 		alarmSoundLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		alarmSoundLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		alarmSoundLabel.setBounds(10, 58, 264, 14);
@@ -57,18 +57,18 @@ public class Settings extends JDialog {
 		contentPanel.add(dbFilePath);
 		dbFilePath.setColumns(10);
 		
-		alarmButton = new JButton("");
-		alarmButton.setBounds(254, 151, 20, 20);
-		contentPanel.add(alarmButton);
+		dbButton = new JButton("...");
+		dbButton.setBounds(254, 151, 20, 20);
+		contentPanel.add(dbButton);
 		
 		alarmSoundPath = new JTextField();
 		alarmSoundPath.setColumns(10);
 		alarmSoundPath.setBounds(10, 83, 234, 20);
 		contentPanel.add(alarmSoundPath);
 		
-		dbButton = new JButton("");
-		dbButton.setBounds(254, 83, 20, 20);
-		contentPanel.add(dbButton);
+		alarmButton = new JButton("...");
+		alarmButton.setBounds(254, 83, 20, 20);
+		contentPanel.add(alarmButton);
 		
 		confirmButton = new JButton("Zatwierd\u017A");
 		confirmButton.setBounds(36, 197, 95, 23);

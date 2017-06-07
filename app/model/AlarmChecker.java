@@ -23,13 +23,13 @@ import model.EventManager;
 
 public class AlarmChecker {
 	private EventManager eventManager;
-	private String alarmFilePath;
 	private CheckEvents checkEvents;
+	private SettingsManager settingsManager;
 	
-	public AlarmChecker(EventManager eventManager) {
+	public AlarmChecker(EventManager eventManager, SettingsManager settingsManager) {
 		this.eventManager = eventManager;
-		this.alarmFilePath = "alarm.wav";
-
+		this.settingsManager = settingsManager;
+		
 		Timer t = new Timer();
 		
 		checkEvents = new CheckEvents(this.eventManager.getEventList());
@@ -93,6 +93,11 @@ public class AlarmChecker {
 		}
 		
 		private void playSound() {
+			String alarmFilePath = settingsManager.getAlarmFilePath();
+			if (alarmFilePath.isEmpty()) {
+				return;
+			}
+			
 	        InputStream in = null;
 			try {
 				in = new FileInputStream(this.alarmFilePath);

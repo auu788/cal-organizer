@@ -5,17 +5,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
+
+import javax.swing.filechooser.FileSystemView;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.AnyTypePermission;
+import com.thoughtworks.xstream.security.ArrayTypePermission;
 import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 public class XMLManager {
 	private XStream xstream;
+	private String settingsDefaultPath;
 	
 	public XMLManager() {
 		xstream = new XStream(new DomDriver());
@@ -24,6 +32,22 @@ public class XMLManager {
 		xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
 		xstream.allowTypeHierarchy(Collection.class);
 		xstream.allowTypeHierarchy(Event.class);
+		xstream.addPermission(ArrayTypePermission.ARRAYS);
+		xstream.addPermission(NullPermission.NULL);
+		xstream.addPermission(AnyTypePermission.ANY);
+		
+		String myDocumentsPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
+		this.settingsDefaultPath = myDocumentsPath + "/.organizer/settings.xml";
+		String directoryPath = myDocumentsPath + "/.organizer";
+		
+		File directory = new File(directoryPath);
+	    if (!directory.exists()){
+	    	try {
+				Files.createDirectories(Paths.get(directoryPath));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
 	}
 	
 	public void exportToXML(List<Event> eventList, File filePath) {
@@ -93,5 +117,67 @@ public class XMLManager {
 		}
 		
 		return eventList;
+	}
+	
+	public void exportSettings(String[] settings) {
+		xstream.alias("settings", String[].class);
+		
+		FileWriter file = null;
+		try {
+			file = new FileWriter(this.settingsDefaultPath);
+		} catch (IOException e) {
+			System.err.println("Nie uda³o siê stworzyæ pliku.");
+			e.printStackTrace();
+		}
+		
+		try {
+			file.write("<?xml version=\"1.0\"?>\n");
+		} catch (IOException e) {
+			System.err.println("Nie uda³o siê zapisaæ XML-a do pliku.");
+			e.printStackTrace();
+		}
+		
+		try {
+			file.flush();
+		} catch (IOException e1) {
+			System.err.println("Nie uda³o siê wyczyœciæ bufora strumienia.");
+			e1.printStackTrace();
+		}
+		try {
+			file.close();
+		} catch (IOException e1) {
+			System.err.println("Nie uda³o siê zamkn¹æ pliku.");
+			e1.printStackTrace();
+		}
+		
+		try {
+			xstream.toXML(settings, new FileWriter(this.settingsDefaultPath, true));
+		} catch (IOException e) {
+			System.err.println("Nie uda³o siê zapisaæ XML-a do pliku.");
+			e.printStackTrace();
+		}
+	}
+	
+	public String[] importSettings() {
+		xstream.alias("settings", String[].class);
+
+		String[] settings = null;
+		FileReader reader = null;
+		
+		try {
+			reader = new FileReader(this.settingsDefaultPath);
+		} catch (FileNotFoundException e) {
+			System.err.println("Nie uda³o siê wczytaæ danych z pliku XML.");
+			e.printStackTrace();
+		}
+		
+		try {
+			settings = (String[]) xstream.fromXML(reader);
+		} catch (XStreamException e) {
+			System.err.println("Nie uda³o siê przetworzyæ danych z pliku XML.");
+			e.printStackTrace();
+		}
+		
+		return settings;
 	}
 }

@@ -9,30 +9,49 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 public class EventManager {
+	SettingsManager settingsManager;
+	String defaultDBPath;
+	
 	List<Event> eventList = new ArrayList<Event>();
 	
 	DBManager db;
 	XMLManager xml;
 	ICSManager ics;
 	
-	public EventManager() {
+	public EventManager(SettingsManager settingsManager) {
+		this.settingsManager = settingsManager;
+		
 		db = new DBManager();
 		xml = new XMLManager();
 		ics = new ICSManager();
 		
-		//eventList = db.loadEventsFromDB();
+		String dbFile = settingsManager.getDBFilePath();
+		
+		if (!dbFile.isEmpty()) {
+			if (dbFile.endsWith(".db")) {
+				importFromDB(new File(dbFile));
+			} else if (dbFile.endsWith(".xml")) {
+				importFromXML(new File(dbFile));
+			} else {
+				System.err.println("Z³y format bazy, nie wczytano...");
+				System.exit(1);
+			}
+			
+			this.defaultDBPath = dbFile;
+		}
+		
 	}
 	
 	public void addEvent(String name, String place, Date date, Date alarm) {
 		Event event = new Event(name, place, date, alarm);
 		eventList.add(event);
 		
-		//db.addEvent(event);
+		if (defaultDBPath.endsWith(".xml")) {
+			xml.exportToXML(eventList, new File(defaultDBPath));
+		} else {
+			db.addEvent(event);
+		}
 	}
 	
 	public List<Integer> getEventsByYearAndMonth(int year, int month) {
@@ -82,8 +101,13 @@ public class EventManager {
 		
 		while (iter.hasNext()) {
 			if (iter.next().getID().equals(id)) {
-				//db.removeById(id.toString());
 				iter.remove();
+				
+				if (defaultDBPath.endsWith(".xml")) {
+					xml.exportToXML(eventList, new File(defaultDBPath));
+				} else {
+					db.removeById(id.toString());
+				}
 			}
 		}
 	}
@@ -111,6 +135,20 @@ public class EventManager {
 	public void exportToICS(File file) {
 		ics.exportToICS(this.eventList, file);
 		System.out.println("Pomyœlnie wyeksportowane dane do pliku ICS.");
+	}
+
+	public void updateDBPath(String dbFilePath) {
+		this.defaultDBPath = dbFilePath;
+		
+		System.out.println("Aktualizacja œcie¿ki: " + dbFilePath);
+		
+		if (!this.defaultDBPath.isEmpty()) {
+			if (this.defaultDBPath.endsWith(".xml")) {
+				this.eventList = xml.importFromXML(new File(this.defaultDBPath));
+			} else {
+				this.eventList = db.importFromDB(new File(this.defaultDBPath));
+			}
+		}
 	}
 
 }

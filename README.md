@@ -2,15 +2,14 @@
 
 ### TO-DO
 
-- UI Improvments 
-	- ~~Menu with import / export, settings, about~~
-	- Visual improvments in every frame
+- ~~UI Improvments~~
 - ~~XML Support~~
 - ~~Outlook extension support~~
-- "Settings" dialog
-- "About" dialog
+- ~~"Settings" dialog~~
+- ~~"About" dialog~~
 - ~~"Remove older than..." support~~
 - ~~Alarm support~~
 - ~~Import / export support~~
 - Better input validation
+- Docstrings, comments and code improvements
 - Date picker?

@@ -116,11 +116,7 @@ public class CalendarView extends JFrame {
 		
 		removeOlderItem = new JMenuItem("Usu\u0144 wydarzenia starsze ni\u017C...");
 		eventsMenu.add(removeOlderItem);
-		
-//		JSeparator separator = new JSeparator();
-//		separator.setBounds(10, 85, 675, 3);
-//		contentPane.add(separator);
-		
+
 		// Siatka kalendarza
 		monthGridPanel.setBounds(10, 85, 675, 350);
 		contentPane.add(monthGridPanel);
@@ -295,52 +291,22 @@ public class CalendarView extends JFrame {
 			buttonFields[i].addActionListener(listenForDayButtons);
 		}
 	}
-	
-//	public void createShowEventsButton() {
-//		showEventsButton = new JButton("Wyœwietl wydarzenia");
-//		showEventsButton.setBounds(505, 11, 165, 43);
-//		contentPane.add(showEventsButton);
-//	}
-//	
+
 	public void addShowEventsButtonListener(ActionListener listenForShowEventsButton) {
 		showEventsItem.addActionListener(listenForShowEventsButton);
 	}
-	
-//	public void createRemoveOlderThanButton() {
-//		removeOlderButton = new JButton("Usuñ wydarzenia starsznie ni¿");
-//		removeOlderButton.setBounds(505, 60, 165, 43);
-//		contentPane.add(removeOlderButton);
-//	}
-//	
+
 	public void addRemoveOlderThanButtonListener(ActionListener listenForRemoveOlderThanButton) {
 		removeOlderItem.addActionListener(listenForRemoveOlderThanButton);
 	}
 	
-//	public void createImportFromXMLButton() {
-//		importFromXMLButton = new JButton("Importuj z XML-a");
-//		importFromXMLButton.setBounds(505, 110, 165, 43);
-//		contentPane.add(importFromXMLButton);
-//	}
-	
 	public void addImportFromXMLButtonListener(ActionListener listenForImportFromXML) {
 		impXMLItem.addActionListener(listenForImportFromXML);
 	}
-	
-//	public void createExportToXMLButton() {
-//		exportToXMLButton = new JButton("Eksportuj do XML-a");
-//		exportToXMLButton.setBounds(505, 160, 165, 43);
-//		contentPane.add(exportToXMLButton);
-//	}
-//	
+
 	public void addExportToXMLButtonListener(ActionListener listenForExportToXML) {
 		expXMLItem.addActionListener(listenForExportToXML);
 	}
-	
-//	public void createExportToICSButton() {
-//		exportToICSButton = new JButton("Eksportuj do ICS-a");
-//		exportToICSButton.setBounds(505, 210, 165, 43);
-//		contentPane.add(exportToICSButton);
-//	}
 	
 	
 	
