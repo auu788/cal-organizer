@@ -21,11 +21,23 @@ import view.AlarmDialog;
 import model.Event;
 import model.EventManager;
 
+/**
+ * Klasa zarz¹dzaj¹ca powiadomieniami.
+ */
 public class AlarmChecker {
 	private EventManager eventManager;
 	private CheckEvents checkEvents;
 	private SettingsManager settingsManager;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt zarz¹dzaj¹cy powiadomieniami.
+	 * Ustawia timer, który co minutê uruchamia obiekt sprawdzaj¹cy, czy maj¹ byæ pokazane jakieœ powiadmienia.
+	 * 
+	 * @param eventManager menad¿er wydarzeñ, wykorzystywany do pobrania aktualnej listy wydarzeñ
+	 * @param settingsManager menad¿er ustawieñ, wykorzystywany do pobrania aktualnego dŸwiêku powiadomienia
+	 * @see EventManager 
+	 * @see SettingsManager
+	 */
 	public AlarmChecker(EventManager eventManager, SettingsManager settingsManager) {
 		this.eventManager = eventManager;
 		this.settingsManager = settingsManager;
@@ -36,17 +48,28 @@ public class AlarmChecker {
 		t.scheduleAtFixedRate(checkEvents, 0, 60000);
 	}
 	
+	/**
+	 * Aktualizuje œcie¿kê do pliku dŸwiêkowego WAV dla powiadomieñ
+	 * @param path œcie¿ka do pliku dŸwiêkowego WAV
+	 */
 	public void updateAlarmFilePath(String path) {
 		checkEvents.updateAlarmFilePath(path);
 	}
 	
+	/**
+	 * Klasa urchamiaj¹ca okienko z powiadomieniem, jeœli czas alarmu dla wydarzenia pokrywa z czasem teraŸniejszym.
+	 */
 	private class CheckEvents extends TimerTask {
 		private List<Event> eventList;
 		private String alarmFilePath;
 		
+		/**
+		 * Konstruktor inicjalizuj¹cy obiekt sprawdzaj¹cy czy w³¹czyæ powiadomienie.
+		 * @param eventList lista wydarzeñ
+		 * @see EventManager
+		 */
 		public CheckEvents(List<Event> eventList) {
 			this.eventList = eventList;
-			this.alarmFilePath = "alarm.wav";
 		}
 		
 		@Override
@@ -54,10 +77,17 @@ public class AlarmChecker {
 			checkEvents();
 		}
 		
+		/**
+		 * Aktualizuje œcie¿kê do pliku dŸwiêkowego WAV dla powiadomieñ
+		 * @param path œcie¿ka do pliku dŸwiêkowego WAV
+		 */
 		public void updateAlarmFilePath(String path) {
 			this.alarmFilePath = path;
 		}
 		
+		/**
+		 * Sprawdza w chwili odpalenia metody dla jakiegokolwiek wydarzenia data alarmu jest taka sama jak czas teraŸniejszy. Jeœli tak, to w³¹cza okienko z powiadomieniem i sygna³ dŸwiêkowy.
+		 */
 		private void checkEvents() {
 			Date now = new Date();
 			Calendar cal = Calendar.getInstance();
@@ -92,9 +122,12 @@ public class AlarmChecker {
 			}
 		}
 		
+		/**
+		 * W³¹cza dŸwiêk powiadomienia, jeœli u¿ytkownik takowy ustawi³.
+		 */
 		private void playSound() {
 			String alarmFilePath = settingsManager.getAlarmFilePath();
-			if (alarmFilePath.isEmpty()) {
+			if (alarmFilePath.isEmpty() || alarmFilePath == null) {
 				return;
 			}
 			

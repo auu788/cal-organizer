@@ -26,6 +26,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzna wyskakuj¹cego powiadomienia.
+ */
 public class AlarmDialog extends JDialog {
 	JLabel titleLabel, placeLabel, nameLabel;
 	private final JPanel contentPanel = new JPanel();
@@ -34,6 +37,9 @@ public class AlarmDialog extends JDialog {
 	private JTextArea nameTextArea;
 	private JButton okButton;
 
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Powiadomienie", ustawiaj¹cy parametry poszczególnych elementów.
+	 */
 	public AlarmDialog() {
 		setTitle("Powiadomienie");
 		setBounds(100, 100, 250, 250);
@@ -100,14 +106,26 @@ public class AlarmDialog extends JDialog {
 
 	}
 	
+	/**
+	 * Ustawia tekst mówi¹cy, za ile zacznie siê wydarzenie.
+	 * @param timeStr tekst, za ile zacznie siê wydarzenie
+	 */
 	public void setTimeText(String timeStr) {
 		eventTimeTextField.setText("Wydarzenie rozpocznie si\u0119 za " + timeStr);
 	}
 	
+	/** Ustawia nazwê lub opis wydarzania.
+	 * 
+	 * @param nameStr nazwa lub opis wydarzenia
+	 */
 	public void setNameText(String nameStr) {
 		nameTextArea.setText(nameStr);
 	}
 	
+	/**
+	 * Ustawia miejsce wydarzenia.
+	 * @param placeStr miejsce wydarzenia
+	 */
 	public void setPlaceText(String placeStr) {
 		placeTextField.setText(placeStr);
 	}

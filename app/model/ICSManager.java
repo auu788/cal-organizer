@@ -26,9 +26,15 @@ import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 import net.fortuna.ical4j.validate.ValidationException;
 
+/**
+ * Klasa zarz¹dzaj¹ca formatem standardowym iCalendar.
+ */
 public class ICSManager {
 	private Calendar calendar;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt menad¿era formatu standardowego iCalendar.
+	 */
 	public ICSManager() {
 		calendar = new Calendar();
 		calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
@@ -36,6 +42,12 @@ public class ICSManager {
 		calendar.getProperties().add(CalScale.GREGORIAN);
 	}
 	
+	/**
+	 * Eksportuje wszystkie wydarzenia do formatu standardowego iCalendar (.ics).
+	 * 
+	 * @param eventList lista wydarzeñ
+	 * @param file œcie¿ka do pliku ICS
+	 */
 	public void exportToICS(List<Event> eventList, File file) {
 		
 		for (Event evt : eventList) {

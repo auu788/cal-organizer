@@ -21,10 +21,17 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
+/**
+ * Klasa zarz¹dzaj¹ca formatem XML.
+ */
 public class XMLManager {
 	private XStream xstream;
 	private String settingsDefaultPath;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt menad¿era formatu XML.
+	 * Ustanawia równie¿ œcie¿kê dla pliku z ustawieniami.
+	 */
 	public XMLManager() {
 		xstream = new XStream(new DomDriver());
 		
@@ -50,6 +57,12 @@ public class XMLManager {
 	    }
 	}
 	
+	/**
+	 * Eksportuje wszystkie wydarzenia do formatu XML.
+	 * 
+	 * @param eventList lista wydarzeñ
+	 * @param filePath œcie¿ka do pliku XML
+	 */
 	public void exportToXML(List<Event> eventList, File filePath) {
 		xstream.alias("event", Event.class);
 		xstream.alias("events", List.class);
@@ -90,6 +103,13 @@ public class XMLManager {
 		}
 	}
 	
+	/**
+	 * Importuje wydarzenia z formatu XML.
+	 * 
+	 * @param file œcie¿ka do pliku XML
+	 * @return lista wydarzeñ
+	 * @see Event
+	 */
 	public List<Event> importFromXML(File file) {
 		List<Event> eventList = null;
 		FileReader reader = null;
@@ -119,6 +139,11 @@ public class XMLManager {
 		return eventList;
 	}
 	
+	/**
+	 * Eksportuje ustawienia do pliku XML.
+	 * 
+	 * @param settings mapa ustawieñ
+	 */
 	public void exportSettings(String[] settings) {
 		xstream.alias("settings", String[].class);
 		
@@ -158,6 +183,11 @@ public class XMLManager {
 		}
 	}
 	
+	/**
+	 * Importuje ustawienia z pliku XML.
+	 * 
+	 * @return mapa ustawieñ
+	 */
 	public String[] importSettings() {
 		xstream.alias("settings", String[].class);
 

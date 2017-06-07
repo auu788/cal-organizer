@@ -26,8 +26,6 @@ public class YearComboBoxListener implements ActionListener {
 				theEventManager.getEventsByYearAndMonth(
 						theCalendarView.getYearSelectComboBoxSelectedItem(),
 						theCalendarView.getMonthSelectComboBoxSelectedItem()));
-		
-		theEventManager.printAllEvents();
 	}
 
 }

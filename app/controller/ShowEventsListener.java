@@ -7,6 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import model.EventManager;
+import model.OrganizerTableModel;
 
 import view.CalendarView;
 import view.EventTable;
@@ -28,7 +29,9 @@ public class ShowEventsListener implements ActionListener {
 				    "Uwaga!",
 				    JOptionPane.WARNING_MESSAGE);
 		} else {
-			eventTable = new EventTable(this.eventManager);
+			
+			OrganizerTableModel organizerTableModel = new OrganizerTableModel(this.eventManager);
+			eventTable = new EventTable(organizerTableModel);
 			eventTable.addSearchButtonListener(new SearchListener(this.eventTable, 
 					eventTable.getSearchButton(), eventTable.getClearSearchButton()));
 			

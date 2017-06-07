@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzny okienka "Ustawienia".
+ */
 public class Settings extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -22,6 +25,10 @@ public class Settings extends JDialog {
 	private JTextField alarmSoundPath, dbFilePath;
 	private JButton alarmButton, dbButton, confirmButton, cancelButton;
 
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Ustawienia", ustawiaj¹cy parametry poszczególnych elementów.
+	 * @param date data wydarzeñ
+	 */
 	public Settings() {
 		setBounds(400, 200, 300, 270);
 		getContentPane().setLayout(new BorderLayout());
@@ -79,34 +86,66 @@ public class Settings extends JDialog {
 		contentPanel.add(cancelButton);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku odpowiadaj¹cego za okienko wyboru bazy danych SQlite lub XML.
+	 * @param listenForDBFilePathButton listener odpowiadaj¹cy za pobranie œciezki bazy danych SQlite lub XML.
+	 */
 	public void addDBFilePathButtonListener(ActionListener listenForDBFilePathButton) {
 		dbButton.addActionListener(listenForDBFilePathButton);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku odpowiadaj¹cego za okienko wyboru pliku dŸwiêkowego.
+	 * @param listenForDBFilePathButton listener odpowiadaj¹cy za pobranie œciezki pliku dŸwiêkowego
+	 */
 	public void addAlarmFilePathButtonListener(ActionListener listenForAlarmFilePathButton) {
 		alarmButton.addActionListener(listenForAlarmFilePathButton);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku "PotwierdŸ". 
+	 * @param listenForConfirmation listener potwierdzaj¹cy akcjê
+	 */
 	public void addConfirmButtonListener(ActionListener listenForConfirmButton) {
 		confirmButton.addActionListener(listenForConfirmButton);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku "Anuluj". 
+	 * @param listenForConfirmation listener anuluj¹cy akcjê
+	 */
 	public void addCancelButtonListener(ActionListener listenForCancelButton) {
 		cancelButton.addActionListener(listenForCancelButton);
 	}
 	
+	/**
+	 * Pobiera œcie¿kê do pliku bazy danych SQlite lub XML
+	 * @return œcie¿ka do pliku bazy danych
+	 */
 	public String getDBFilePath() {
 		return dbFilePath.getText();
 	}
 	
+	/**
+	 * Pobiera œcie¿kê do pliku dŸwiêkowego WAV dla powiadomienia.
+	 * @return œcie¿ka do pliku dŸwiêkowego WAV
+	 */
 	public String getAlarmFilePath() {
 		return alarmSoundPath.getText();
 	}
 	
+	/**
+	 * Ustawia œcie¿kê do pliku bazy danych SQlite lub XML
+	 * @return œcie¿ka do pliku bazy danych
+	 */
 	public void setDBFilePath(String path) {
 		dbFilePath.setText(path);
 	}
 	
+	/**
+	 * Ustawia œcie¿kê do pliku dŸwiêkowego WAV dla powiadomienia.
+	 * @return œcie¿ka do pliku dŸwiêkowego WAV
+	 */
 	public void setAlarmFilePath(String path) {
 		alarmSoundPath.setText(path);
 	}

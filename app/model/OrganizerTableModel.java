@@ -17,12 +17,19 @@ import java.util.function.ToLongFunction;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 
+/**
+ * Model danych dla tabeli z wydarzenami.
+ */
 public class OrganizerTableModel extends AbstractTableModel {
 	private Vector<String> columnNames;
 	private Vector<String[]> data;
 	private EventManager eventManager;
 	private TableRowSorter<OrganizerTableModel> sorter;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy model danych tabeli z wydarzeniami.
+	 * @param eventManager
+	 */
 	public OrganizerTableModel(EventManager eventManager) {
 		this.eventManager = eventManager;
 		columnNames = new Vector<String>();
@@ -41,6 +48,13 @@ public class OrganizerTableModel extends AbstractTableModel {
 		updateTableData("", "", "");
 	}
 	
+	/**
+	 * Aktualizuje tabelê wydarzeniami spe³niaj¹cymi poszczególne warunki, takie jak tekst wystêpuj¹cy w nazwie lub miejscu wydarzenia czy data wydarzenia znajduj¹ca siê pomiêdzy parametrami od - do.
+	 * 
+	 * @param searchText szukany tekst
+	 * @param dateFrom data - od
+	 * @param dateTo data - do
+	 */
 	public void updateTableData(String searchText, String dateFrom, String dateTo) {
 		clearTable();
 		List<Event> events;
@@ -86,6 +100,12 @@ public class OrganizerTableModel extends AbstractTableModel {
 		}
 	}
 	
+	/**
+	 * Zwraca listê wydarzeñ znajduj¹cych siê pomiêdzy poszczególnymi datami.
+	 * @param df data - od
+	 * @param dt data - do
+	 * @return lista wydarzeñ
+	 */
 	private List<Event> getEventsInBetweenDates(String df, String dt) {
 		List<Event> events = eventManager.getEventList();
 		List<Event> filtered_events = new ArrayList<Event>();
@@ -129,7 +149,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 		return filtered_events;
 		
 	}
-
+	
 	@Override
 	public String getColumnName(int col) {
 		  return columnNames.get(col);
@@ -149,7 +169,10 @@ public class OrganizerTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		return data.get(row)[col];
 	}
-
+	
+	/**
+	 * Usuwa wszystkie dane z tabeli.
+	 */
 	public void clearTable()
 	{
 		data.clear();

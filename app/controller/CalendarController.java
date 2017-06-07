@@ -41,14 +41,14 @@ public class CalendarController {
 		
 		theCalendarView.createAddEventButton();
 		theCalendarView.addAddEventButtonListener(new AddEventButtonListener(this.theCalendarView, this.theEventManager));
-		theCalendarView.addShowEventsButtonListener(new ShowEventsListener(this.theEventManager, this.theCalendarView));
-		theCalendarView.addRemoveOlderThanButtonListener(new RemoveOlderThanListener(this.theEventManager, this.theCalendarView));
+		theCalendarView.addShowEventsItemListener(new ShowEventsListener(this.theEventManager, this.theCalendarView));
+		theCalendarView.addRemoveOlderThanItemListener(new RemoveOlderThanListener(this.theEventManager, this.theCalendarView));
 		
-		theCalendarView.addImportFromXMLButtonListener(new ImportExportXMLListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
-		theCalendarView.addExportToXMLButtonListener(new ImportExportXMLListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));		
-		theCalendarView.addExportToICSButtonListener(new ExportToICSListener(this.theEventManager));
-		theCalendarView.addImportFromDBButtonListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
-		theCalendarView.addExportToDBButtonListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));
+		theCalendarView.addImportFromXMLItemListener(new ImportExportXMLListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
+		theCalendarView.addExportToXMLItemListener(new ImportExportXMLListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));		
+		theCalendarView.addExportToICSItemListener(new ExportToICSListener(this.theEventManager));
+		theCalendarView.addImportFromDBItemListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
+		theCalendarView.addExportToDBItemListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));
 		
 		theCalendarView.addSettingsItemListener(new SettingsListener(ac, this.theEventManager, this.settingsManager, this.theCalendarView));
 		theCalendarView.addAboutItemListener(new ActionListener() {
@@ -77,7 +77,7 @@ public class CalendarController {
 						theCalendarView.getYearSelectComboBoxSelectedItem(),
 						theCalendarView.getMonthSelectComboBoxSelectedItem()));
 		
-		theCalendarView.markTodaysDay(theCalendarModel.getTodaysDay(year, month));
+		theCalendarView.markTodaysDay(theCalendarModel.getTodaysDay());
 
 	}
 	

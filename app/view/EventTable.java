@@ -26,8 +26,10 @@ import model.EventManager;
 import model.OrganizerTableModel;
 import model.TableSorter;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzny okienka "Wszystkie wydarzenia".
+ */
 public class EventTable extends JDialog {
-	private EventManager eventManager; // Do przeniesienia z widoku do kontrolera
 	private JTextField dateFromTextField;
 	private JTextField dateToTextField;
 	private JTextField searchTextField;
@@ -35,9 +37,12 @@ public class EventTable extends JDialog {
 	private JTable table;
 	private OrganizerTableModel organizerTableModel;
 	
-	public EventTable(EventManager eventManager) {
-		this.eventManager = eventManager;
-		this.organizerTableModel = new OrganizerTableModel(this.eventManager);
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Wszystkie wydarzenia", ustawiaj¹cy parametry poszczególnych elementów.
+	 * @param organizerTableModel model danych dla tabeli z wydarzeniami
+	 */
+	public EventTable(OrganizerTableModel organizerTableModel) {
+		this.organizerTableModel = organizerTableModel;
 		setBounds(400, 200, 900, 300);
 		setTitle("Wszystkie wydarzenia");
 		getContentPane().setLayout(null);
@@ -94,6 +99,9 @@ public class EventTable extends JDialog {
 		updateTable();
 	}
 	
+	/**
+	 * Tworzy szkielet tabeli z wydarzeniami.
+	 */
 	public void updateTable() {
 		table = new JTable(this.organizerTableModel);
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -125,49 +133,93 @@ public class EventTable extends JDialog {
 		
 		getContentPane().add(scrollPane);
 	}
+	
+	/**
+	 * Dodaje listener dla przycisku "Szukaj".
+	 * @param listenForSearchButton listener odpowiadaj¹cy za filtrowanie wydarzeñ w tabeli
+	 */
 	public void addSearchButtonListener(ActionListener listenForSearchButton) {
 		searchButton.addActionListener(listenForSearchButton);
 		clearSearchButton.addActionListener(listenForSearchButton);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku "Usuñ zaznaczone".
+	 * @param listenForSelectedRows listener odpowiadaj¹cy za usuwanie zaznaczonych wydarzeñ
+	 */
 	public void addRemoveSelectedListener(ActionListener listenForSelectedRows) {
 		removeSelectedButton.addActionListener(listenForSelectedRows);
 	}
 	
+	/**
+	 * Pobiera datê z pola tekstowego "Data - od".
+	 * @return data od
+	 */
 	public String getDateFrom() {
 		return dateFromTextField.getText();
 	}
 	
+	/**
+	 * Pobiera datê z pola tekstowego "Data - do".
+	 * @return data do
+	 */
 	public String getDateTo() {
 		return dateToTextField.getText();
 	}
 	
+	/**
+	 * Pobiera szukany tekst.
+	 * @return szukany tekst
+	 */
 	public String getSearchText() {
 		return searchTextField.getText();
 	}
 	
+	/**
+	 * Pobiera model tabeli.
+	 * @return model tabeli
+	 */
 	public OrganizerTableModel getTableModel() {
 		return organizerTableModel;
 	}
 	
+	/**
+	 * Pobiera obiekt graficzny tabeli.
+	 * @return obiekt graficzny tabeli
+	 */
 	public JTable getTable() {
 		return table;
 	}
 	
+	/**
+	 * Pobiera obiekt graficzny przycisku "Szukaj".
+	 * @return obiekt graficzny przycisku "Szukaj"
+	 */
 	public JButton getSearchButton() {
 		return searchButton;
 	}
 	
+	/**
+	 * Pobiera obiekt graficzny przycisku "Wyczyœæ filtrowanie".
+	 * @return obiekt graficzny przycisku "Wyczyœæ filtrowanie"
+	 */
 	public JButton getClearSearchButton() {
 		return clearSearchButton;
 	}
 	
+	/**
+	 * Usuwa dane z pól tekstowych: "Szukaj", "Data - od", "Data - do". 
+	 */
 	public void clearFields() {
 		dateFromTextField.setText("");
 		dateToTextField.setText("");
 		searchTextField.setText("");
 	}
 	
+	/**
+	 * Pobiera zaznaczone rzêdy danych z tabeli.
+	 * @return tablica z indeksami zaznaczonych rzêdów z tabeli
+	 */
 	public int[] getSelectedRows() {
 		return table.getSelectedRows();
 	}

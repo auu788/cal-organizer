@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Klasa odpowiadaj¹ca za pojedyñczy obiekt wydarzenia.
+ */
 public class Event {
 	private UUID id;
 	private String name;
@@ -13,6 +16,14 @@ public class Event {
 	private Date date;
 	private Date alarm;
 	
+	/** 
+	 * Konstruktor generuj¹cy instacjê wydarzenia.
+	 * 
+	 * @param name 	nazwa lub opis wydarzenia
+	 * @param place miejsce wydarzenia
+	 * @param date 	data wydarzenia
+	 * @param alarm data wyst¹pienia powiadomienia
+	 */
 	public Event(String name, String place, Date date, Date alarm) {
 		this.id = UUID.randomUUID();
 		this.name = name;
@@ -26,7 +37,16 @@ public class Event {
 		}
 	}
 	
-	// Dla wczytywania z bazy
+	/** 
+	 * Konstruktor generuj¹cy instacjê wydarzenia.
+	 * Wykorzystywany dla pobierania wydarzeñ z bazy danych.
+	 * 
+	 * @param name 	nazwa lub opis wydarzenia
+	 * @param place miejsce wydarzenia
+	 * @param date 	data wydarzenia
+	 * @param alarm data wyst¹pienia powiadomienia
+	 * @param uuid unikalny identyfikator uuid
+	 */
 	public Event(String name, String place, String date, String alarm, String uuid) {
 		DateFormat date_format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		
@@ -50,44 +70,84 @@ public class Event {
 			}
 		}
 	}
-
+	/**
+	 * Ustawia nazwê lub opis wydarzenia.
+	 * 
+	 * @param name nazwa lub opis wydarzenia
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Ustawia miejsce lub opis wydarzenia.
+	 * 
+	 * @param place miejsce wydarzenia
+	 */
 	public void setPlace(String place) {
 		this.place = place;
 	}
 	
+	/**
+	 * Ustawia datê wydarzenia.
+	 * 
+	 * @param date data wydarzenia
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
+	/**
+	 * Ustawia datê powiadomienia dla wydarzenia.
+	 * 
+	 * @param alarm data powiadomienia
+	 */
 	public void setAlarm(Date alarm) {
 		this.alarm = alarm;
 	}
 	
+	/**
+	 * Zwraca unikalny identyfikator UUID.
+	 * 
+	 * @return identyfikator UUID
+	 */
 	public UUID getID() {
 		return id;
 	}
 	
+	/**
+	 * Zwraca nazwê lub opis wydarzenia.
+	 * 
+	 * @return nazwa lub opis wydarzenia
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Zwraca miejsce wydarzenia.
+	 * 
+	 * @return miejsce wydarzenia
+	 */
 	public String getPlace() {
 		return place;
 	}
 	
+	/**
+	 * Zwraca datê wydarzenia.
+	 * 
+	 * @return data wydarzenia
+	 */
 	public Date getDate() {
 		return date;
 	}
 	
+	/**
+	 * Zwraca datê powiadomienia dla wydarzenia.
+	 * 
+	 * @return data powiadomienia dla wydarzenia
+	 */
 	public Date getAlarm() {
 		return alarm;
-	}
-	
-	public String getEventInfo() {
-		return "ID: " + id + ", nazwa: " + name + ", miejsce: " + place + ", data: " + date + ", alarm: " + alarm;
 	}
 }

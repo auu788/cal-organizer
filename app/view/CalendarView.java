@@ -30,6 +30,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+/**
+ * Klasa odpowiadaj¹ca za okno g³ówne organizera. Pokazuje kalendarz g³ówny.
+ */
 public class CalendarView extends JFrame {
 	private int todaysDay, todaysMonth, todaysYear;
 	
@@ -55,6 +58,9 @@ public class CalendarView extends JFrame {
 	private int d_year = Calendar.getInstance().get(Calendar.YEAR);
 	private int d_month = Calendar.getInstance().get(Calendar.MONTH);
 
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okna g³ównego, ustawiaj¹cy parametry poszczególnych elementów.
+	 */
 	public CalendarView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,6 +129,9 @@ public class CalendarView extends JFrame {
 		monthGridPanel.setLayout(new GridLayout(7, 7, 2, 2));
 	}
 
+	/**
+	 * Tworzy siatkê przycisków, które bêd¹ poszczególnymi dniami w kalendarzu.
+	 */
 	public void createButtonFielsGrid(){
 		for (int i = 0; i < buttonFields.length; i++) {
 			buttonFields[i] = new JButton();
@@ -133,6 +142,10 @@ public class CalendarView extends JFrame {
 		}
 	}
 	
+	/**
+	 * Aktualizuje nazwy - dni przycisków na siatce.
+	 * @param dayButtonsText tablica nazw przycisków
+	 */
 	public void updateButtonFielsGrid(String[] dayButtonsText){
 		for (int i = 0; i < buttonFields.length; i++) {
 			buttonFields[i].setText(dayButtonsText[i]);
@@ -151,6 +164,10 @@ public class CalendarView extends JFrame {
 		}
 	}
 
+	/**
+	 * Ustawia nazwy dni tygodnia w górnej czêœci siatki.
+	 * @param dayNames tablica dni tygodnia
+	 */
 	public void setLabelsNames(String[] dayNames){
 		for (int i = 0; i < labels.length; i++) {
 			labels[i] = new JLabel(dayNames[i]);
@@ -164,6 +181,10 @@ public class CalendarView extends JFrame {
 		}
 	}
 	
+	/**
+	 * Dodaje rozwijane menu, pozwalaj¹ce wybraæ rok, który ma wyœwietlaæ siatka kalendarza.
+	 * @param getYears tablica lat
+	 */
 	public void createYearSelectComboBox(String[] getYears) {
 		yearSelectComboBox = new JComboBox<String>(getYears);
 		yearSelectComboBox.setBounds(190, 30, 147, 43);
@@ -175,6 +196,10 @@ public class CalendarView extends JFrame {
 		contentPane.add(yearSelectComboBox);
 	}
 	
+	/**
+	 * Ustawia atrybuty wskazuj¹ce na dzisiejszy dzieñ.
+	 * @param day dzisiejszy dzieñ
+	 */
 	public void markTodaysDay(int day) {
 		this.todaysDay = day;
 		this.todaysMonth = monthSelectComboBox.getSelectedIndex();
@@ -183,6 +208,9 @@ public class CalendarView extends JFrame {
 		updateTodaysDay();
 	}
 	
+	/**
+	 * Zaznacza dzisiejszy dzieñ na siatce kalendarza, jeœli siatka wskazuje na miesi¹c i rok, który mamy.
+	 */
 	private void updateTodaysDay() {
 		if (this.todaysMonth == monthSelectComboBox.getSelectedIndex() &&
 				this.todaysYear == yearSelectComboBox.getSelectedIndex() + 1900) {
@@ -198,15 +226,27 @@ public class CalendarView extends JFrame {
 		}
 	}
 	
+	/**
+	 * Dodaje listener na przycisk "Dodaj wydarzenie"
+	 * @param listenForAddEvent listener dodawania wydarzenia
+	 */
 	public void addAddEventButtonListener(ActionListener listenForAddEvent) {
 		addEventButton.addActionListener(listenForAddEvent);
 		addEventItem.addActionListener(listenForAddEvent);
 	}
 
+	/** Dodaje listener na rozwiajane menu wyboru roku.
+	 * 
+	 * @param listenForSelectYear listener wyboru roku
+	 */
 	public void addYearSelectComboBoxListener(ActionListener listenForSelectYear) {
 		yearSelectComboBox.addActionListener(listenForSelectYear);
 	}
 
+	/**
+	 * Dodaje rozwijane menu, pozwalaj¹ce wybraæ miesiac, który ma wyœwietlaæ siatka kalendarza.
+	 * @param getYears tablica nazw miesiêcy
+	 */
 	public void createMonthSelectComboBox(String[] getMonths) {
 		monthSelectComboBox = new JComboBox<String>(getMonths);
 		monthSelectComboBox.setBounds(370, 30, 147, 43);
@@ -218,42 +258,81 @@ public class CalendarView extends JFrame {
 		contentPane.add(monthSelectComboBox);
 	}
 
+	/** Dodaje listener na rozwiajane menu wyboru miesi¹ca.
+	 * 
+	 * @param listenForSelectYear listener wyboru miesi¹ca
+	 */
 	public void addMonthSelectComboBoxListener(ActionListener listenForSelectMonth) {
 		monthSelectComboBox.addActionListener(listenForSelectMonth);
 	}
 
+	/**
+	 * Pobiera obiekt rozwijanego menu dla roku.
+	 * @return obiekt rozwijanego menu dla roku
+	 */
 	public JComboBox getYearSelectComboBox() {
 		return yearSelectComboBox;
 	}
 	
+	/**
+	 * Pobiera rok wybrany z rozwijanego menu.
+	 * @return rok
+	 */
 	public int getYearSelectComboBoxSelectedItem() {
 		return Integer.parseInt(yearSelectComboBox.getSelectedItem().toString());
 	}
 	
+	/**
+	 * Pobiera miesi¹c wybrany z rozwijanego menu.
+	 * @return miesi¹c
+	 */
 	public int getMonthSelectComboBoxSelectedItem() {
 		return monthSelectComboBox.getSelectedIndex();
 	}
 
+	/**
+	 * Ustawia rozwiajne menu dla roku.
+	 * @param yearSelectComboBox rozwijane menu dla roku
+	 */
 	public void setYearSelectComboBox(JComboBox yearSelectComboBox) {
 		this.yearSelectComboBox = yearSelectComboBox;
 	}
 
+	/**
+	 * Pobiera obiekt rozwijanego menu dla miesi¹ca.
+	 * @return obiekt rozwijanego menu dla miesi¹ca
+	 */
 	public JComboBox getMonthSelectComboBox() {
 		return monthSelectComboBox;
 	}
 
+	/**
+	 * Ustawia rozwiajne menu dla roku.
+	 * @param yearSelectComboBox rozwijane menu dla roku
+	 */
 	public void setMonthSelectComboBox(JComboBox monthSelectComboBox) {
 		this.monthSelectComboBox = monthSelectComboBox;
 	}
 
+	/**
+	 * Pobiera tablicê przycisków z siatki kalendarza
+	 * @return tablica przycisków
+	 */
 	public JButton[] getButtonFields() {
 		return buttonFields;
 	}
 
+	/**
+	 * Aktualizuje tablicê przycisków na siatkê kalendarza.
+	 * @param buttonFields tablica przycisków
+	 */
 	public void setButtonFields(JButton[] buttonFields) {
 		this.buttonFields = buttonFields;
 	}
 	
+	/**
+	 * Dodaje przycisk "Dodaj wydarzenie".
+	 */
 	public void createAddEventButton() {
 		addEventButton = new JButton("Dodaj wydarzenie");
 		addEventButton.setMnemonic('d');
@@ -262,6 +341,10 @@ public class CalendarView extends JFrame {
 		contentPane.add(addEventButton);
 	}
 	
+	/**
+	 * Zaznacza na siatce kalendarza dni, w których wyst¹puj¹ jakiekolwiek wydarzenia.
+	 * @param eventDays
+	 */
 	public void updateEventDays(List<Integer> eventDays) {
 		boolean isEvent;
 		
@@ -286,50 +369,92 @@ public class CalendarView extends JFrame {
 		updateTodaysDay();
 	}
 	
+	/**
+	 * Dodaje listener dla ka¿dego przycisku na siatce kalendarza.
+	 * @param listenForDayButtons listener dla klikniêcia w przycisk
+	 */
 	public void addDayButtonsListener(ActionListener listenForDayButtons) {
 		for (int i = 0; i < buttonFields.length; i++) {
 			buttonFields[i].addActionListener(listenForDayButtons);
 		}
 	}
 
-	public void addShowEventsButtonListener(ActionListener listenForShowEventsButton) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Wyœwietl wydarzenia".
+	 * @param listenForShowEventsButton listener odpowiadaj¹cy za wyœwietlenie wszystkich wydarzeñ
+	 */
+	public void addShowEventsItemListener(ActionListener listenForShowEventsButton) {
 		showEventsItem.addActionListener(listenForShowEventsButton);
 	}
 
-	public void addRemoveOlderThanButtonListener(ActionListener listenForRemoveOlderThanButton) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Usuñ starsze ni¿...".
+	 * @param listenForRemoveOlderThanButton listener odpowiadaj¹cy za usuniêcie wydarzeñ starszych ni¿ podana data
+	 */
+	public void addRemoveOlderThanItemListener(ActionListener listenForRemoveOlderThanButton) {
 		removeOlderItem.addActionListener(listenForRemoveOlderThanButton);
 	}
 	
-	public void addImportFromXMLButtonListener(ActionListener listenForImportFromXML) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Importuj z XML".
+	 * @param listenForImportFromXML listener odpowiadaj¹ca za import z XML-a
+	 */
+	public void addImportFromXMLItemListener(ActionListener listenForImportFromXML) {
 		impXMLItem.addActionListener(listenForImportFromXML);
 	}
 
-	public void addExportToXMLButtonListener(ActionListener listenForExportToXML) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Eksportuj do XML".
+	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do XML-a
+	 */
+	public void addExportToXMLItemListener(ActionListener listenForExportToXML) {
 		expXMLItem.addActionListener(listenForExportToXML);
 	}
 	
-	
-	
-	public void addExportToDBButtonListener(ActionListener listenForExportToDB) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Eksportuj do bazy danych SQLite".
+	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do bazy SQLite
+	 */
+	public void addExportToDBItemListener(ActionListener listenForExportToDB) {
 		expDBItem.addActionListener(listenForExportToDB);
 	}
 	
-	public void addImportFromDBButtonListener(ActionListener listenForImportFromDB) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Importuj z bazy danych SQLite".
+	 * @param listenForImportFromXML listener odpowiadaj¹ca za import z bazy danych SQLite
+	 */
+	public void addImportFromDBItemListener(ActionListener listenForImportFromDB) {
 		impDBItem.addActionListener(listenForImportFromDB);
 	}
 	
-	public void addExportToICSButtonListener(ActionListener listenForExportToICS) {
+	/**
+	 * Dodaje listener dla przycisku z menu "Eksportuj do formatu standardowego ICS".
+	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do formatu ICS
+	 */
+	public void addExportToICSItemListener(ActionListener listenForExportToICS) {
 		expICSItem.addActionListener(listenForExportToICS);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku z menu "O programie".
+	 * @param listenForAboutItem listener odpowiadaj¹cy za okienko "O programie"
+	 */
 	public void addAboutItemListener(ActionListener listenForAboutItem) {
 		aboutItem.addActionListener(listenForAboutItem);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku z menu "WyjdŸ".
+	 * @param listenForExitItem listener odpowiadaj¹cy za wyjœcie z programu
+	 */
 	public void addExitItemListener(ActionListener listenForExitItem) {
 		exitItem.addActionListener(listenForExitItem);
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku z menu "Ustawienia".
+	 * @param listenForSettingsItem listener odpowiadaj¹cy za ustawienia programu
+	 */
 	public void addSettingsItemListener(ActionListener listenForSettingsItem) {
 		settingsItem.addActionListener(listenForSettingsItem);
 	}

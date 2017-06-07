@@ -11,11 +11,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzny okienka "Usuñ wydarzenia starsze ni¿...".
+ */
 public class RemoveOlderThanDialog extends JDialog {
 	private JLabel removeOlderThanLabel;
 	private JTextField dateField;
 	private JButton confirmButton;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Usuñ wydarzenia starsze ni¿...", ustawiaj¹cy parametry poszczególnych elementów.
+	 * @param date data wydarzeñ
+	 */
 	public RemoveOlderThanDialog() {
 		setBounds(500, 200, 250, 200);
 		setTitle("Usuñ wydarzenia");
@@ -38,10 +45,18 @@ public class RemoveOlderThanDialog extends JDialog {
 		getContentPane().add(confirmButton);
 	}
 	
+	/**
+	 * Pobiera wpisan¹ datê, od której ma usun¹æ wydarzenia.
+	 * @return data
+	 */
 	public String getDate() {
 		return dateField.getText();
 	}
 	
+	/**
+	 * Dodaje listener dla przycisku "PotwierdŸ". 
+	 * @param listenForConfirmation listener potwierdzaj¹cy akcjê
+	 */
 	public void addConfirmListener(ActionListener listenForConfirmation) {
 		confirmButton.addActionListener(listenForConfirmation);
 	}

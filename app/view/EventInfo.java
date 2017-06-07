@@ -18,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzny informacji o wydarzeniach z danego dnia.
+ */
 public class EventInfo extends JDialog {
 	int panelY;
 	int panelSize;
@@ -25,7 +28,10 @@ public class EventInfo extends JDialog {
 	JPanel panel;
 	JScrollPane scrollPanel;
 	
-	
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Wydarzenia", ustawiaj¹cy parametry poszczególnych elementów.
+	 * @param date data wydarzeñ
+	 */
 	public EventInfo(String date) {
 		this.panelSize = 40;
 		this.panelY = 40;
@@ -55,6 +61,13 @@ public class EventInfo extends JDialog {
 		getContentPane().add(scrollPanel);
 	}
 	
+	/**
+	 * Dodaje informacje o wydarzeniu do okienka "Wydarzenia".
+	 * @param name nazwa lub opis wydarzenia
+	 * @param place miejsce wydarzenia
+	 * @param hour godzina wydarzenia 
+	 * @param alarm data powiadomienia
+	 */
 	public void addEvent(String name, String place, String hour, String alarm) {
 		JPanel eventPanel = new JPanel();
 		eventPanel.setBounds(0, panelY, 350, 120);

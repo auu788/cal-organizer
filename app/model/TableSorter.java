@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * Klasa pomocniczna dla tabeli, która dostarcza sortowanie po dacie w formacie dd-mm-yyyy.
+ */
 public class TableSorter implements Comparator<String> {
 	@Override
     public int compare(String d1, String d2) {

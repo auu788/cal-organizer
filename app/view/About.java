@@ -19,12 +19,19 @@ import javax.swing.JEditorPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+/**
+ * Klasa odpowiadaj¹ca za interfejs graficzny okienka "O programie".
+ */
 public class About extends JDialog {
 	private JTextField authorsTextField;
 
+	/**
+	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "O programie", ustawiaj¹cy parametry poszczególnych elementów.
+	 */
 	public About() {
 		setBounds(500, 200, 250, 280);
 		getContentPane().setLayout(null);
+		setTitle("O programie");
 		
 		JLabel titleLabel = new JLabel("Organizer");
 		titleLabel.setBounds(10, 0, 214, 30);
