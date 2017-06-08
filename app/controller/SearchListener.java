@@ -7,12 +7,22 @@ import javax.swing.JButton;
 
 import view.EventTable;
 
+/**
+ * Klasa implementuje listener dla przycisku "Szukaj" dostêpny z okna "Wszystkie wydarzenia".
+ * Pozwala na przefiltrowanie wydarzeñ na podstawie szukanej frazy. 
+ * Filtruje atrybuty wydarzenia - nazwa i miejsce wydarzenia.
+ */
 public class SearchListener implements ActionListener {
 	private EventTable eventTable;
 	private JButton searchButton, clearSearchButton;
 	private String searchPhrase, dateFrom, dateTo;
 	
-	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventTable okno z wszystkimi wydarzeniami
+	 * @param searchButton przycisk "Szukaj"
+	 * @param clearSearchButton przycisk "Wyczyœæ filtry"
+	 */
 	public SearchListener(EventTable eventTable, JButton searchButton, JButton clearSearchButton) {
 		this.eventTable = eventTable;
 		this.searchButton = searchButton;

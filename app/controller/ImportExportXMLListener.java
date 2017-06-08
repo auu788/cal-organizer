@@ -13,11 +13,21 @@ import view.CalendarView;
 import model.EventManager;
 import model.ImportExportChooser;
 
+/**
+ * Klasa implementuj¹ca listener dla przycisków "Importuj / Eksportuj do formatu XML".
+ * Tworzy okienko dialogowe pozwalaj¹ce wybraæ miejsce i plik, do którego maj¹ byæ eksportowane wydarzenia.
+ */
 public class ImportExportXMLListener implements ActionListener {
 	EventManager eventManager;
 	ImportExportChooser choose;
 	CalendarView calendarView;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param calendarView g³ówne okno kalendarza
+	 * @param choose enumerator pozwalaj¹cy wybraæ: import / eksport
+	 */
 	public ImportExportXMLListener(EventManager eventManager, CalendarView calendarView, ImportExportChooser choose) {
 		this.eventManager = eventManager;
 		this.choose = choose;

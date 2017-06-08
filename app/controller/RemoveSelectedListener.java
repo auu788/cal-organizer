@@ -11,11 +11,24 @@ import model.EventManager;
 import view.CalendarView;
 import view.EventTable;
 
+/**
+ * Klasa implementuj¹ca listener dla przycisku "Usuñ zaznaczone" dostêpny z okna "Wszystkie wydarzenia".
+ * W oknie tym mo¿na zaznaczaæ wiersze z tabeli, a przycisk ten pozwala na usuniêcie zaznaczonych wydarzeñ.
+ */
 public class RemoveSelectedListener implements ActionListener {
 	private EventTable eventTable;
 	private EventManager eventManager;
 	private CalendarView calendarView;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventTable okno z wszystkimi wydarzeniami
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param calendarView okno g³ówne kalendarza
+	 * @see EventTable
+	 * @see EventManager
+	 * @see CalendarView
+	 */
 	public RemoveSelectedListener(EventTable eventTable, EventManager eventManager, CalendarView calendarView) {
 		this.eventTable = eventTable;
 		this.eventManager = eventManager;

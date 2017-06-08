@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -71,7 +73,7 @@ public class SettingsManager {
 	 * Pobiera ustawienia z pliku z ustawieniami XML i aktualizuje œcie¿ki do plików bazy danych i pliku dŸwiêkowego.
 	 */
 	private void updatePaths() {
-		String[] settings = xml.importSettings();
+		Map<String, String> settings = xml.importSettings();
 		
 		if (settings == null) {
 			this.alarmFilePath = "";
@@ -79,16 +81,17 @@ public class SettingsManager {
 			return;
 		}
 		
-		if (settings[0] == null) {
+		if (settings.get("alarmSoundFilePath") == null) {
 			this.alarmFilePath = "";
 		} else {
-			this.alarmFilePath = settings[0];
+			this.alarmFilePath = settings.get("alarmSoundFilePath");
 		}
 		
-		if (settings[1] == null) {
+		if (settings.get("dbFilePath") == null) {
 			this.dbFilePath = "";
 		} else {
-			this.dbFilePath = settings[1];
+			
+			this.dbFilePath = settings.get("dbFilePath");
 		}
 	}
 	
@@ -96,8 +99,11 @@ public class SettingsManager {
 	 * Eksportuje ustawienia do pliku z ustawieniami XML.
 	 */
 	private void updateSettingsFile() {
+		Map<String, String> settings = new HashMap<String, String>();
 		
-		String[] settings = {this.alarmFilePath, this.dbFilePath};
+		settings.put("alarmSoundFilePath", this.alarmFilePath);
+		settings.put("dbFilePath", this.dbFilePath);
+		
 		xml.exportSettings(settings);
 	}
 	

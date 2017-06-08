@@ -12,11 +12,20 @@ import model.OrganizerTableModel;
 import view.CalendarView;
 import view.EventTable;
 
+/**
+ * Klasa implementuje listener dla przycisku "Wyœwietl wydarzenia".
+ * Pojawia siê wówczas okno ze wszystkimi wydarzeniami w formie tabeli oraz filtrami daty, frazy oraz mo¿liwoœci¹ usuniêcia zaznaczonych wydarzeñ.
+ */
 public class ShowEventsListener implements ActionListener {
 	EventTable eventTable;
 	EventManager eventManager;
 	CalendarView calendarView;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param calendarView g³ówne okno kalendarza
+	 */
 	ShowEventsListener(EventManager eventManager, CalendarView calendarView) {
 		this.eventManager = eventManager;
 		this.calendarView = calendarView;

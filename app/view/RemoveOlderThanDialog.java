@@ -21,7 +21,6 @@ public class RemoveOlderThanDialog extends JDialog {
 	
 	/**
 	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Usuñ wydarzenia starsze ni¿...", ustawiaj¹cy parametry poszczególnych elementów.
-	 * @param date data wydarzeñ
 	 */
 	public RemoveOlderThanDialog() {
 		setBounds(500, 200, 250, 200);

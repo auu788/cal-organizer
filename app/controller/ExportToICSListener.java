@@ -12,9 +12,17 @@ import model.EventManager;
 import model.ICSManager;
 import model.ImportExportChooser;
 
+/**
+ * Klasa implementuj¹ca listener dla przycisku "Eksportuj do iCalendar (ICS)".
+ * Tworzy okienko dialogowe pozwalaj¹ce wybraæ miejsce i plik, do którego maj¹ byæ eksportowane wydarzenia.
+ */
 public class ExportToICSListener implements ActionListener{
 	private EventManager eventManager;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventManager menad¿er wydarzeñ
+	 */
 	public ExportToICSListener(EventManager eventManager) {
 		this.eventManager = eventManager;
 	}

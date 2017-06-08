@@ -19,12 +19,23 @@ import view.About;
 import view.AlarmDialog;
 import view.CalendarView;
 
+/**
+ * Klasa - kontroler, bêd¹ca ³¹cznikiem pomiêdzy wszystkimi klikalnymi obiektami graficznymi, a baz¹ danych.
+ * Dodaje listenery do poszczególnych przycisków, widocznych w okne kalendarza g³ównego.
+ * @author auu78
+ *
+ */
 public class CalendarController {
 	SettingsManager settingsManager = new SettingsManager();
 	private EventManager theEventManager = new EventManager(this.settingsManager);
 	private CalendarView theCalendarView = new CalendarView();
 	private CalendarModel theCalendarModel = new CalendarModel();
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy kontroler g³ówny dla kalendarza.
+	 * @param theCalendarView g³ówny widok kalendarza
+	 * @param theCalendarModel g³ówny model kalendarza
+	 */
 	public CalendarController(final CalendarView theCalendarView, CalendarModel theCalendarModel){
 		this.theCalendarView = theCalendarView;
 		this.theCalendarModel = theCalendarModel;

@@ -8,12 +8,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.XStreamException;
+import com.thoughtworks.xstream.converters.extended.NamedMapConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import com.thoughtworks.xstream.security.ArrayTypePermission;
@@ -144,8 +147,9 @@ public class XMLManager {
 	 * 
 	 * @param settings mapa ustawieñ
 	 */
-	public void exportSettings(String[] settings) {
-		xstream.alias("settings", String[].class);
+	public void exportSettings(Map<String, String> settings) {
+		xstream.registerConverter(new NamedMapConverter(xstream.getMapper(), "entry", "key", String.class, null, String.class, true, false, xstream.getConverterLookup()));
+		xstream.alias("settings", Map.class);
 		
 		FileWriter file = null;
 		try {
@@ -188,10 +192,11 @@ public class XMLManager {
 	 * 
 	 * @return mapa ustawieñ
 	 */
-	public String[] importSettings() {
-		xstream.alias("settings", String[].class);
+	public Map<String, String> importSettings() {
+		xstream.registerConverter(new NamedMapConverter(xstream.getMapper(), "entry", "key", String.class, null, String.class, true, false, xstream.getConverterLookup()));
+		xstream.alias("settings", Map.class);
 
-		String[] settings = null;
+		Map<String, String> settings = new HashMap<String, String>();
 		FileReader reader = null;
 		
 		try {
@@ -202,7 +207,7 @@ public class XMLManager {
 		}
 		
 		try {
-			settings = (String[]) xstream.fromXML(reader);
+			settings = (HashMap<String, String>) xstream.fromXML(reader);
 		} catch (XStreamException e) {
 			System.err.println("Nie uda³o siê przetworzyæ danych z pliku XML.");
 			e.printStackTrace();

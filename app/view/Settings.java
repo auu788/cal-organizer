@@ -27,7 +27,6 @@ public class Settings extends JDialog {
 
 	/**
 	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Ustawienia", ustawiaj¹cy parametry poszczególnych elementów.
-	 * @param date data wydarzeñ
 	 */
 	public Settings() {
 		setBounds(400, 200, 300, 270);
@@ -96,7 +95,7 @@ public class Settings extends JDialog {
 	
 	/**
 	 * Dodaje listener dla przycisku odpowiadaj¹cego za okienko wyboru pliku dŸwiêkowego.
-	 * @param listenForDBFilePathButton listener odpowiadaj¹cy za pobranie œciezki pliku dŸwiêkowego
+	 * @param listenForAlarmFilePathButton listener odpowiadaj¹cy za pobranie œciezki pliku dŸwiêkowego
 	 */
 	public void addAlarmFilePathButtonListener(ActionListener listenForAlarmFilePathButton) {
 		alarmButton.addActionListener(listenForAlarmFilePathButton);
@@ -104,7 +103,7 @@ public class Settings extends JDialog {
 	
 	/**
 	 * Dodaje listener dla przycisku "PotwierdŸ". 
-	 * @param listenForConfirmation listener potwierdzaj¹cy akcjê
+	 * @param listenForConfirmButton listener potwierdzaj¹cy akcjê
 	 */
 	public void addConfirmButtonListener(ActionListener listenForConfirmButton) {
 		confirmButton.addActionListener(listenForConfirmButton);
@@ -112,7 +111,7 @@ public class Settings extends JDialog {
 	
 	/**
 	 * Dodaje listener dla przycisku "Anuluj". 
-	 * @param listenForConfirmation listener anuluj¹cy akcjê
+	 * @param listenForCancelButton listenForConfirmation listener anuluj¹cy akcjê
 	 */
 	public void addCancelButtonListener(ActionListener listenForCancelButton) {
 		cancelButton.addActionListener(listenForCancelButton);
@@ -136,7 +135,7 @@ public class Settings extends JDialog {
 	
 	/**
 	 * Ustawia œcie¿kê do pliku bazy danych SQlite lub XML
-	 * @return œcie¿ka do pliku bazy danych
+	 * @param path œcie¿ka do pliku dŸwiêkowego WAV
 	 */
 	public void setDBFilePath(String path) {
 		dbFilePath.setText(path);
@@ -144,7 +143,7 @@ public class Settings extends JDialog {
 	
 	/**
 	 * Ustawia œcie¿kê do pliku dŸwiêkowego WAV dla powiadomienia.
-	 * @return œcie¿ka do pliku dŸwiêkowego WAV
+	 * @param path œcie¿ka do pliku dŸwiêkowego WAV
 	 */
 	public void setAlarmFilePath(String path) {
 		alarmSoundPath.setText(path);

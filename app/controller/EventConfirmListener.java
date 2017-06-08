@@ -17,6 +17,10 @@ import model.EventManager;
 import view.AddEventDialog;
 import view.CalendarView;
 
+/**
+ * Klasa implementuj¹ca listener dla akcji "PotwierdŸ" dla okna "Dodaj wydarzenie".
+ * Przeprowadzana jest tutaj weryfikacja danych wpisanych w poszczególne pola dotycz¹ce wydarzenia.
+ */
 public class EventConfirmListener implements ActionListener {
 	AddEventDialog dialog;
 	AddEventModel model;
@@ -27,6 +31,13 @@ public class EventConfirmListener implements ActionListener {
 	String place = null;
 	Date dateHour = null;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param dialog obiekt okienka "Dodaj wydarzenie"
+	 * @param model obiekt z danymi do wypisania w okienku "Dodaj okienko"
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param theCalendarView g³ówne okienko kalendarza
+	 */
 	EventConfirmListener(AddEventDialog dialog, AddEventModel model, EventManager eventManager, CalendarView theCalendarView) {
 		this.dialog = dialog;
 		this.model = model;
@@ -51,6 +62,12 @@ public class EventConfirmListener implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Pobiera datê skonwertowan¹ ze Stringa na Date.
+	 * @param dateHour data jako obiekt String
+	 * @return data jako obiekt Date
+	 * @throws ParseException wyj¹tek, gdy format daty String jest niezgodny z narzuconm wzorcem
+	 */
 	private Date convertStringToDate(String dateHour) throws ParseException {
 		DateFormat date_format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		Date date = null;
@@ -68,6 +85,10 @@ public class EventConfirmListener implements ActionListener {
 		return date;
 	}
 	
+	/**
+	 * Przepisuje poszczególne atrybuty wydarzenia do atrybutów klasy, jeœli przejd¹ weryfikacjê.
+	 * @return wartoœæ boolean mówi¹ca, czy wszystkie dane przesz³y weryfikacjê
+	 */
 	private boolean assignAndIsValid() {
 		if (dialog.getEventName().length() == 0) {
 			JOptionPane.showMessageDialog(dialog,
@@ -99,6 +120,10 @@ public class EventConfirmListener implements ActionListener {
 		return true;
 	}
 	
+	/**
+	 * Pobiera datê alarmu jako obiekt Date, odejmuj¹c od daty wydarzenia wybran¹ przez u¿ytkownika iloœæ minut.
+	 * @return data alarmu
+	 */
 	private Date getDateOfAlarm() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateHour);

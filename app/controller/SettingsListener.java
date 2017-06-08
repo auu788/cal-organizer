@@ -17,12 +17,24 @@ import model.SettingsManager;
 import view.CalendarView;
 import view.Settings;
 
+/**
+ * Klasa implementuje przycisk "Ustawienia". 
+ * Pojawa siê wówczas okno z ustawieniami, w których mo¿na ustaliæ œcie¿kê do pliku dŸwiêkowego WAV i œciê¿kê do bazy danych SQLite lub XML.
+ * Plik dŸwiêkowy WAV bêdzie odgrywany podczas pokazania okna z powiadomieniem o wydarzeniu.
+ */
 public class SettingsListener implements ActionListener {
 	private AlarmChecker alarmChecker;
 	private EventManager eventManager;
 	private SettingsManager settingsManager;
 	private CalendarView calendarView;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param alarmChecker obiekt zarz¹dzaj¹cy powiadomieniami
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param settingsManager menad¿er ustawieñ
+	 * @param calendarView g³ówne okno kalendarza
+	 */
 	public SettingsListener(AlarmChecker alarmChecker, EventManager eventManager, SettingsManager settingsManager, CalendarView calendarView) {
 		this.alarmChecker = alarmChecker;
 		this.eventManager = eventManager;

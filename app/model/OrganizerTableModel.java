@@ -28,7 +28,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 	
 	/**
 	 * Konstruktor inicjalizuj¹cy model danych tabeli z wydarzeniami.
-	 * @param eventManager
+	 * @param eventManager menad¿er wydarzeñ
 	 */
 	public OrganizerTableModel(EventManager eventManager) {
 		this.eventManager = eventManager;

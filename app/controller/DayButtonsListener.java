@@ -19,10 +19,21 @@ import view.AddEventDialog;
 import view.CalendarView;
 import view.EventInfo;
 
+/**
+ * Klasa implementuj¹ca listenery dla ka¿dego dnia - przycisku na siatce kalendarza.
+ * Jeœli w danym dniu istnieje jakiekolwiek wydarzenie, zostanie otworzone okienko ze szczegó³ami na jego temat.
+ */
 public class DayButtonsListener implements ActionListener {
 	CalendarView theCalendarView;
 	EventManager theEventManager;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera dla dnia - przycisku na kalendarzu.
+	 * @param theCalendarView g³ówny widok kalendarza
+	 * @param theEventManager menad¿er kalendarza
+	 * @see CalendarView
+	 * @see EventManager
+	 */
 	public DayButtonsListener(CalendarView theCalendarView, EventManager theEventManager) {
 		this.theCalendarView = theCalendarView;
 		this.theEventManager = theEventManager;

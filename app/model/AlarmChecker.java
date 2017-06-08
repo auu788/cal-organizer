@@ -107,7 +107,6 @@ public class AlarmChecker {
 						alarmText = alarmMinutes + " minut";
 					}
 					
-					System.out.println("ALARM - " + evt.getName() + " --- " + evt.getPlace());
 					AlarmDialog alarm = new AlarmDialog();
 					alarm.setAutoRequestFocus(true);
 					alarm.setLocationRelativeTo(null);
@@ -127,13 +126,14 @@ public class AlarmChecker {
 		 */
 		private void playSound() {
 			String alarmFilePath = settingsManager.getAlarmFilePath();
+
 			if (alarmFilePath.isEmpty() || alarmFilePath == null) {
 				return;
 			}
 			
 	        InputStream in = null;
 			try {
-				in = new FileInputStream(this.alarmFilePath);
+				in = new FileInputStream(alarmFilePath);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

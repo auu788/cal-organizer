@@ -3,16 +3,11 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,14 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 /**
  * Klasa odpowiadaj¹ca za okno g³ówne organizera. Pokazuje kalendarz g³ówny.
@@ -245,7 +234,7 @@ public class CalendarView extends JFrame {
 
 	/**
 	 * Dodaje rozwijane menu, pozwalaj¹ce wybraæ miesiac, który ma wyœwietlaæ siatka kalendarza.
-	 * @param getYears tablica nazw miesiêcy
+	 * @param getMonths tablica nazw miesiêcy
 	 */
 	public void createMonthSelectComboBox(String[] getMonths) {
 		monthSelectComboBox = new JComboBox<String>(getMonths);
@@ -260,7 +249,7 @@ public class CalendarView extends JFrame {
 
 	/** Dodaje listener na rozwiajane menu wyboru miesi¹ca.
 	 * 
-	 * @param listenForSelectYear listener wyboru miesi¹ca
+	 * @param listenForSelectMonth listener wyboru miesi¹ca
 	 */
 	public void addMonthSelectComboBoxListener(ActionListener listenForSelectMonth) {
 		monthSelectComboBox.addActionListener(listenForSelectMonth);
@@ -308,7 +297,7 @@ public class CalendarView extends JFrame {
 
 	/**
 	 * Ustawia rozwiajne menu dla roku.
-	 * @param yearSelectComboBox rozwijane menu dla roku
+	 * @param monthSelectComboBox rozwijane menu dla roku
 	 */
 	public void setMonthSelectComboBox(JComboBox monthSelectComboBox) {
 		this.monthSelectComboBox = monthSelectComboBox;
@@ -343,7 +332,7 @@ public class CalendarView extends JFrame {
 	
 	/**
 	 * Zaznacza na siatce kalendarza dni, w których wyst¹puj¹ jakiekolwiek wydarzenia.
-	 * @param eventDays
+	 * @param eventDays lista dni, w których wystêpuj¹ jakiekolwiek wydarzenia
 	 */
 	public void updateEventDays(List<Integer> eventDays) {
 		boolean isEvent;
@@ -405,7 +394,7 @@ public class CalendarView extends JFrame {
 
 	/**
 	 * Dodaje listener dla przycisku z menu "Eksportuj do XML".
-	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do XML-a
+	 * @param listenForExportToXML listener odpowiadaj¹ca za eksport do XML-a
 	 */
 	public void addExportToXMLItemListener(ActionListener listenForExportToXML) {
 		expXMLItem.addActionListener(listenForExportToXML);
@@ -413,7 +402,7 @@ public class CalendarView extends JFrame {
 	
 	/**
 	 * Dodaje listener dla przycisku z menu "Eksportuj do bazy danych SQLite".
-	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do bazy SQLite
+	 * @param listenForExportToDB listener odpowiadaj¹ca za eksport do bazy SQLite
 	 */
 	public void addExportToDBItemListener(ActionListener listenForExportToDB) {
 		expDBItem.addActionListener(listenForExportToDB);
@@ -421,7 +410,7 @@ public class CalendarView extends JFrame {
 	
 	/**
 	 * Dodaje listener dla przycisku z menu "Importuj z bazy danych SQLite".
-	 * @param listenForImportFromXML listener odpowiadaj¹ca za import z bazy danych SQLite
+	 * @param listenForImportFromDB listener odpowiadaj¹ca za import z bazy danych SQLite
 	 */
 	public void addImportFromDBItemListener(ActionListener listenForImportFromDB) {
 		impDBItem.addActionListener(listenForImportFromDB);
@@ -429,7 +418,7 @@ public class CalendarView extends JFrame {
 	
 	/**
 	 * Dodaje listener dla przycisku z menu "Eksportuj do formatu standardowego ICS".
-	 * @param listenForImportFromXML listener odpowiadaj¹ca za eksport do formatu ICS
+	 * @param listenForExportToICS listener odpowiadaj¹ca za eksport do formatu ICS
 	 */
 	public void addExportToICSItemListener(ActionListener listenForExportToICS) {
 		expICSItem.addActionListener(listenForExportToICS);

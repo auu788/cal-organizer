@@ -23,10 +23,20 @@ import model.EventManager;
 import view.CalendarView;
 import view.RemoveOlderThanDialog;
 
+/**
+ * Klasa implementuj¹ca listener dla przycisku "Usuñ starsze ni¿...".
+ * Zajmuje siê znalezieniem takich wydarzeñ i usuniêciem poprzez wywo³anie metody removeByID z EventManager'a.
+ * @see EventManager
+ */
 public class RemoveOlderThanListener implements ActionListener {
 	private EventManager eventManager;
 	private CalendarView calendarView;
 
+	/**
+	 * Konstruktor inicjalizuj¹cy obiekt listenera.
+	 * @param eventManager menad¿er wydarzeñ
+	 * @param calendarView g³ówne okno wydarzeñ
+	 */
 	public RemoveOlderThanListener(EventManager eventManager, CalendarView calendarView) {
 		this.eventManager = eventManager;
 		this.calendarView = calendarView;

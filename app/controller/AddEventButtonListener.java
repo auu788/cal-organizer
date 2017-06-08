@@ -13,11 +13,21 @@ import model.EventManager;
 import view.AddEventDialog;
 import view.CalendarView;
 
+/**
+ * Klasa implementuj¹ca listener dla akcji "Dodaj wydarzenie". Zajmuje siê otwarciem okienka dialogowego.
+ */
 public class AddEventButtonListener implements ActionListener {
 	private boolean isOpen = false;
 	private CalendarView theCalendarView;
 	private EventManager eventManager;
 	
+	/**
+	 * Konstruktor inicjalizuj¹cy listener.
+	 * @param theCalendarView obiekt widoku g³ównego okna kalenarza
+	 * @param eventManager obiekt menad¿era wydarzeñ
+	 * @see CalendarView
+	 * @see EventManager
+	 */
 	AddEventButtonListener(CalendarView theCalendarView, EventManager eventManager) {
 		this.theCalendarView = theCalendarView;
 		this.eventManager = eventManager;
