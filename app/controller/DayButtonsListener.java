@@ -3,9 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +13,6 @@ import javax.swing.JDialog;
 import model.Event;
 import model.EventManager;
 
-import view.AddEventDialog;
 import view.CalendarView;
 import view.EventInfo;
 
@@ -46,7 +43,6 @@ public class DayButtonsListener implements ActionListener {
 		List<Event> eventList = theEventManager.getEventsByDate(year, month, day);
 		EventInfo eventInfo;
 		
-		System.out.println(eventList.size());
 		if ((eventList).size() > 0) {
 			SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
 			eventInfo = new EventInfo(day + "-" + month + "-" + year);

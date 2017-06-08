@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,19 +48,10 @@ public class AlarmChecker {
 	}
 	
 	/**
-	 * Aktualizuje œcie¿kê do pliku dŸwiêkowego WAV dla powiadomieñ
-	 * @param path œcie¿ka do pliku dŸwiêkowego WAV
-	 */
-	public void updateAlarmFilePath(String path) {
-		checkEvents.updateAlarmFilePath(path);
-	}
-	
-	/**
 	 * Klasa urchamiaj¹ca okienko z powiadomieniem, jeœli czas alarmu dla wydarzenia pokrywa z czasem teraŸniejszym.
 	 */
 	private class CheckEvents extends TimerTask {
 		private List<Event> eventList;
-		private String alarmFilePath;
 		
 		/**
 		 * Konstruktor inicjalizuj¹cy obiekt sprawdzaj¹cy czy w³¹czyæ powiadomienie.
@@ -75,14 +65,6 @@ public class AlarmChecker {
 		@Override
 		public void run() {
 			checkEvents();
-		}
-		
-		/**
-		 * Aktualizuje œcie¿kê do pliku dŸwiêkowego WAV dla powiadomieñ
-		 * @param path œcie¿ka do pliku dŸwiêkowego WAV
-		 */
-		public void updateAlarmFilePath(String path) {
-			this.alarmFilePath = path;
 		}
 		
 		/**

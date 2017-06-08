@@ -6,13 +6,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.UUID;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -82,15 +77,12 @@ public class RemoveOlderThanListener implements ActionListener {
 					
 				List<Event> tmpEventList = new ArrayList<Event>(eventList);
 
-				System.out.println(eventList.size() + " --- " + tmpEventList.size());
-				
 				for (int i = 0; i < tmpEventList.size(); i++) {
 					Date eventDate = tmpEventList.get(i).getDate();
 					
 					if (eventDate.before(inputDate)) {
 						eventManager.removeById(tmpEventList.get(i).getID());
 						removedCount += 1;
-						System.out.println("Usuniêto wydarzenie");
 					}
 				}
 				

@@ -1,22 +1,17 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JScrollBar;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import java.awt.GridLayout;
 
 /**
  * Klasa odpowiadaj¹ca za interfejs graficzny informacji o wydarzeniach z danego dnia.

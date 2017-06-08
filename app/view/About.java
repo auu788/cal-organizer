@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Desktop;
-import java.awt.EventQueue;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -9,12 +8,10 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;

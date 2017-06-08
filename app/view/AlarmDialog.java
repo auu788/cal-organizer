@@ -10,21 +10,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Klasa odpowiadaj¹ca za interfejs graficzna wyskakuj¹cego powiadomienia.
@@ -33,7 +25,6 @@ public class AlarmDialog extends JDialog {
 	JLabel titleLabel, placeLabel, nameLabel;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField eventTimeTextField, placeTextField;
-	private JTextField textField;
 	private JTextArea nameTextArea;
 	private JButton okButton;
 

@@ -4,15 +4,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.ToDoubleFunction;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
@@ -24,7 +19,7 @@ public class OrganizerTableModel extends AbstractTableModel {
 	private Vector<String> columnNames;
 	private Vector<String[]> data;
 	private EventManager eventManager;
-	private TableRowSorter<OrganizerTableModel> sorter;
+	//private TableRowSorter<OrganizerTableModel> sorter;
 	
 	/**
 	 * Konstruktor inicjalizuj¹cy model danych tabeli z wydarzeniami.

@@ -31,9 +31,7 @@ public class CalendarView extends JFrame {
 	private JLabel[] labels = new JLabel[7];
 	private JComboBox yearSelectComboBox;
 	private JComboBox monthSelectComboBox;
-	private JButton addEventButton, showEventsButton, removeOlderButton;
-	private JButton importFromXMLButton, exportToXMLButton;
-	private JButton exportToICSButton;
+	private JButton addEventButton;
 	
 	// Menu bar
 	private JMenuBar menuBar;

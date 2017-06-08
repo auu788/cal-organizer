@@ -6,12 +6,9 @@ import java.io.File;
 
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import model.AlarmChecker;
 import model.EventManager;
-import model.ImportExportChooser;
 import model.SettingsManager;
 
 import view.CalendarView;
@@ -23,7 +20,6 @@ import view.Settings;
  * Plik dŸwiêkowy WAV bêdzie odgrywany podczas pokazania okna z powiadomieniem o wydarzeniu.
  */
 public class SettingsListener implements ActionListener {
-	private AlarmChecker alarmChecker;
 	private EventManager eventManager;
 	private SettingsManager settingsManager;
 	private CalendarView calendarView;
@@ -35,8 +31,7 @@ public class SettingsListener implements ActionListener {
 	 * @param settingsManager menad¿er ustawieñ
 	 * @param calendarView g³ówne okno kalendarza
 	 */
-	public SettingsListener(AlarmChecker alarmChecker, EventManager eventManager, SettingsManager settingsManager, CalendarView calendarView) {
-		this.alarmChecker = alarmChecker;
+	public SettingsListener(EventManager eventManager, SettingsManager settingsManager, CalendarView calendarView) {
 		this.eventManager = eventManager;
 		this.settingsManager = settingsManager;
 		this.calendarView = calendarView;
@@ -51,7 +46,6 @@ public class SettingsListener implements ActionListener {
 		
 		settings.addAlarmFilePathButtonListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Klik");
 				JFileChooser fileChooser = new JFileChooser();
 				File file;
 				
@@ -95,8 +89,7 @@ public class SettingsListener implements ActionListener {
 		settings.addConfirmButtonListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String alarmFilePath = settings.getAlarmFilePath();
-				alarmChecker.updateAlarmFilePath(alarmFilePath);
-				System.out.println("Sciezka: " + alarmFilePath);
+
 				settingsManager.setAlarmFilePath(settings.getAlarmFilePath());
 				settingsManager.setDBFilePath(settings.getDBFilePath());
 				eventManager.updateDBPath(settings.getDBFilePath());

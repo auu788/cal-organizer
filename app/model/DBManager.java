@@ -48,7 +48,6 @@ public class DBManager {
 	 * @see Event
 	 */
 	public void addEvent(Event evt) {
-		System.out.println(this.hashCode());
 		DateFormat date_format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		String date = date_format.format(evt.getDate());
 		String alarm;
@@ -149,9 +148,7 @@ public class DBManager {
 		for (Event evt : eventList) {
 			addEvent(evt);
 		}
-		
-		System.out.println("Pomyœlnie wyeksportowane wydarzenia do bazy danych.");
-		
+	
 		closeConnection();
 	}
 	

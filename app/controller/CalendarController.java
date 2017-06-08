@@ -2,21 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.AlarmChecker;
 import model.CalendarModel;
-import model.DBManager;
 import model.EventManager;
 import model.ImportExportChooser;
 import model.SettingsManager;
-import model.XMLManager;
 import view.About;
-import view.AlarmDialog;
 import view.CalendarView;
 
 /**
@@ -42,7 +36,6 @@ public class CalendarController {
 		
 		AlarmChecker ac = new AlarmChecker(this.theEventManager, this.settingsManager);
 		
-		
 		theCalendarView.setLabelsNames(theCalendarModel.getDayNames());
 		theCalendarView.createYearSelectComboBox(theCalendarModel.getYears());
 		theCalendarView.createMonthSelectComboBox(theCalendarModel.getMonthsNames());
@@ -60,8 +53,8 @@ public class CalendarController {
 		theCalendarView.addExportToICSItemListener(new ExportToICSListener(this.theEventManager));
 		theCalendarView.addImportFromDBItemListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.IMPORT));
 		theCalendarView.addExportToDBItemListener(new ImportExportDBListener(this.theEventManager, this.theCalendarView, ImportExportChooser.EXPORT));
+		theCalendarView.addSettingsItemListener(new SettingsListener(this.theEventManager, this.settingsManager, this.theCalendarView));
 		
-		theCalendarView.addSettingsItemListener(new SettingsListener(ac, this.theEventManager, this.settingsManager, this.theCalendarView));
 		theCalendarView.addAboutItemListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				About about = new About();

@@ -135,10 +135,6 @@ public class XMLManager {
 
 		}
 		
-		for (Event evt : eventList) {
-			System.out.println(evt.getName());
-		}
-		
 		return eventList;
 	}
 	

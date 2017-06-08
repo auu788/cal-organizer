@@ -1,18 +1,13 @@
 package view;
 
-import java.awt.EventQueue;
+
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.text.MaskFormatter;
@@ -28,7 +23,7 @@ public class AddEventDialog extends JDialog {
 	private JTextArea nameTxtField;
 	private JFormattedTextField dateTxtField, hourTxtField;
 	private JComboBox alarmComboBox;
-	private JButton confirmButton, cancelButton;
+	private JButton confirmButton;
 	
 	/**
 	 * Konstruktor inicjalizuj¹cy initefejs graficzny okienka "Dodaj wydarzenie", ustawiaj¹cy parametry poszczególnych elementów.
