@@ -4,8 +4,6 @@ import java.util.Calendar;
 
 /**
  * Klasa zarz¹dzaj¹ca danymi znajduj¹cymi w g³ównej ramce kalendarza.
- * @author auu78
- *
  */
 public class CalendarModel {
 	private String monthsNames[] = { "Styczeñ", "Luty", "Marzec", "Kwiecieñ", "Maj", "Czerwiec", "Lipiec", "Sierpieñ",

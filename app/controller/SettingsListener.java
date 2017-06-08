@@ -26,7 +26,6 @@ public class SettingsListener implements ActionListener {
 	
 	/**
 	 * Konstruktor inicjalizuj¹cy obiekt listenera.
-	 * @param alarmChecker obiekt zarz¹dzaj¹cy powiadomieniami
 	 * @param eventManager menad¿er wydarzeñ
 	 * @param settingsManager menad¿er ustawieñ
 	 * @param calendarView g³ówne okno kalendarza
